@@ -1,0 +1,5 @@
+version: "3.7"
+
+services:
+  writefreely:
+    image: writeas/writefreely:0.12.0
