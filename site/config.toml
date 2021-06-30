@@ -17,7 +17,7 @@ rssLimit     = 10
   dateformNum     = "02-01-2006"
   dateformNumTime = "15:04 02-01-2006"
 
-  homeSubtitle = "\"islet\" means a small island"
+  homeSubtitle = "\"islet\" means a small island 🏝️"
 
   disableReadOtherPosts = false
   enableThemeToggle = true
