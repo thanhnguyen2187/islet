@@ -1,11 +1,11 @@
 new-env:
     cp .sample.env .env
 
-build-static-page:
+build-site:
     cd site && hugo
 
-update-static-page: build-static-page
-    sudo docker-compose up -d --force-recreate islet-site
+update-site-remotely:
+    scripts/update-site-remotely.sh
 
 serve-static-page:
     cd site && hugo server -D
