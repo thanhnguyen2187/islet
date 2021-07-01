@@ -1,5 +1,9 @@
 https://nguyenhuythanh.com {
-    try_files {path} /
     file_server browse
     root * /var/www/public
+
+    handle_errors {
+        rewrite * /{http.error.status_code}.html
+        file_server
+    }
 }
