@@ -1,7 +1,7 @@
 ---
 title: "About"
 date: 2021-06-29T22:38:20+07:00
-draft: true
+draft: false
 ---
 
 The name is Thanh. My work was mostly in the backend developing spectrum, but my

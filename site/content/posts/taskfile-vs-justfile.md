@@ -1,7 +1,7 @@
 ---
 title: "Taskfile vs Justfile"
 date: 2021-06-30T22:25:09+07:00
-draft: true
+draft: false
 toc: true
 tags:
 - taskfile
