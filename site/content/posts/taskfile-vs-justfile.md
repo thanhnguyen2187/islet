@@ -4,10 +4,13 @@ date: 2021-06-30T22:25:09+07:00
 draft: true
 toc: true
 tags:
-- explanation
 - taskfile
 - justfile
 - task-runner
+categories:
+- explanation
+series: 
+- comparison
 ---
 
 A more correct title would be "`task` vs `just`", but it will look confusing for

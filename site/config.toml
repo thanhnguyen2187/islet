@@ -52,7 +52,7 @@ rssLimit     = 10
 [taxonomies]
   category = "categories"
   tag      = "tags"
-  # series   = "series"
+  series   = "series"
 
 [menu]
   [[menu.main]]
