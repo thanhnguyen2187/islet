@@ -11,6 +11,12 @@ rssLimit     = 10
 [author]
   name = "Thanh Nguyen"
 
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
 [params]
   dateform        = "02-01-2006"
   dateformShort   = "02-01"

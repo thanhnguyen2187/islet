@@ -2,6 +2,7 @@
 title: "Taskfile vs Justfile"
 date: 2021-06-30T22:25:09+07:00
 draft: true
+toc: true
 tags:
 - explanation
 - taskfile
@@ -9,7 +10,7 @@ tags:
 - task-runner
 ---
 
-A more correct title would be "`task` vs `just`", but it would look confusing for
+A more correct title would be "`task` vs `just`", but it will look confusing for
 the search engines. I did not find a comparison post on anywhere, so here we
 are. In this post, I will tell my experiences and evaluations on them.
 
