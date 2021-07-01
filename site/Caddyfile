@@ -1,4 +1,4 @@
-http://0.0.0.0:1313 {
+http://*:1313 {
     try_files {path} /
     file_server browse
     root * /var/www/public

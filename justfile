@@ -10,3 +10,6 @@ push-static-page-image: build-static-page
 
 serve-static-page:
     cd site && hugo server -D
+
+serve-static-page-production:
+    cd site && hugo server

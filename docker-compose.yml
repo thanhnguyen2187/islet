@@ -2,24 +2,11 @@ version: "3.7"
 
 services:
 
-  watchtower:
-    container_name: islet_watchtower
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      # - /root/.docker/config.json:config.json
-    command: --interval 30
-
-  islet-site:
-    container_name: islet_site
-    restart: always
-    image: thanhnguyen2187/islet-site
-    ports: ["1313:1313"]
-
   web-server:
     container_name: islet_web_server
     restart: always
-    ports: ["80:80", "443:443"]
+    # ports: ["80:80", "443:443"]
     image: caddy:2.4.0-alpine
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
+    network_mode: host
