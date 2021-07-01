@@ -16,7 +16,7 @@ services:
 
   web-server:
     restart: always
+    ports: ["80:80", "443:443"]
     image: caddy:2.4.0-alpine
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-    network_mode: host
