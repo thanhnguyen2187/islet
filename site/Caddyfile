@@ -1,7 +1,7 @@
 localhost:1313 {
     try_files {path} /
     file_server browse
-    root * /var/www/site/public
+    root * /var/www/public
 
     handle_errors {
         @404 {
