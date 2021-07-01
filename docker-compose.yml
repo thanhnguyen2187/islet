@@ -12,7 +12,7 @@ services:
   islet-site:
     restart: always
     image: thanhnguyen2187/islet-site
-    ports: ["1313:1313"]
+    ports: ["1313:80"]
 
   web-server:
     restart: always
