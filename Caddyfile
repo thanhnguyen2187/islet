@@ -1,5 +1,6 @@
 https://nguyenhuythanh.com {
-    file_server browse
+    encode zstd gzip
+    file_server
     root * /var/www/public
 
     handle_errors {
