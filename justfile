@@ -9,3 +9,9 @@ update-site-remote:
 
 serve-site:
     cd site && hugo server -D
+
+open-site:
+    xdg-open http://localhost:1313
+
+open-site-production:
+    xdg-open https://nguyenhuythanh.com

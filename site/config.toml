@@ -4,6 +4,7 @@ title        = "Thanh's Islet"
 theme        = "hello-friend-ng"
 paginate     = 10
 rssLimit     = 10
+enableGitInfo = true
 
 # PygmentsCodeFences = true
 # PygmentsStyle = "monokai"

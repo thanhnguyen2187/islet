@@ -15,6 +15,9 @@ other = "Also available in"
 [archives]
 other = "Archives"
 
+[posts]
+other = "Posts"
+
 [home]
 other = "Home"
 

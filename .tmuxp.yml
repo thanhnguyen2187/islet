@@ -1,0 +1,12 @@
+session_name: 'islet'
+windows:
+- window_name: site
+  layout: main-horizontal
+  options:
+    main-pane-height: 38
+    automatic-rename: 'off'
+  panes:
+  - shell_command: nvim -S
+    focus: true
+  - shell_command: just serve-site
+  - shell_command: sleep 3 && just open-site

@@ -13,6 +13,11 @@ My posts are categorized vaguely following
 [Divio's Documentation System](https://documentation.divio.com/):
 
 - [explanation](/categories/explanation/): high level view of stuff
-- [tutorial](/categories/tutorial/): step-by-step on how to do something for newbies
-- [how-to guide](/categories/how-to-guide/): a guide for people who is familiar with the topic
-- [reference](/categories/reference/): code/configuration line-by-line explanation
+- [tutorial](/categories/tutorial/): step-by-step on how to do something for
+  newbies
+- [how-to guide](/categories/how-to-guide/): a guide for people who is familiar
+  with the topic
+- [reference](/categories/reference/): code/configuration line-by-line
+  explanation
+
+You can see every category [here](/categories/), and all the tags [there](/tags/).
