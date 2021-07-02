@@ -4,8 +4,8 @@ new-env:
 build-site:
     cd site && hugo
 
-update-site-remotely:
-    scripts/update-site-remotely.sh
+update-site-remote:
+    scripts/update-site-remote.sh
 
-serve-static-page:
+serve-site:
     cd site && hugo server -D
