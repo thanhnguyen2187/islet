@@ -15,3 +15,9 @@ open-site:
 
 open-site-production:
     xdg-open https://nguyenhuythanh.com
+
+commit-site MESSAGE:
+    cd site && git add . && git commit -m "{{MESSAGE}}"
+
+push-site:
+    cd site && git push && git checkout master
