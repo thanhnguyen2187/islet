@@ -4,7 +4,7 @@ new-env:
 build-site:
     cd site && hugo
 
-update-site-remote:
+update-site-remote: push-site
     scripts/update-site-remote.sh
 
 serve-site:
