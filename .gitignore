@@ -1,2 +1,4 @@
 .env
 Session.vim
+
+caddy_data/
