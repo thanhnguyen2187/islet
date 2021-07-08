@@ -21,3 +21,7 @@ commit-site MESSAGE:
 
 push-site:
     cd site && git push && git checkout master
+
+create-new-post NAME:
+    cd site && hugo new "posts/{{NAME}}.md"
+
