@@ -8,3 +8,6 @@ https://nguyenhuythanh.com {
         file_server
     }
 }
+
+log {
+}
