@@ -5,10 +5,16 @@ services:
   islet-site:
     container_name: islet_site
     restart: always
-    # ports: ["80:80", "443:443"]
+    ports: ["80:80", "443:443"]
     image: caddy:2.4.0-alpine
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./caddy_data:/data
       - ./site/public:/var/www/public
-    network_mode: host
+
+  islet-fathom:
+    container_name: islet_analytics
+    image: usefathom/fathom:latest
+    env_file: .env
+    volumes:
+      - ./fathom.db:/app/fathom.db
