@@ -1,3 +1,5 @@
+set dotenv-load := true
+
 new-env:
     cp .sample.env .env
 
