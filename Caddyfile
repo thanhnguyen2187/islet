@@ -8,7 +8,3 @@ https://nguyenhuythanh.com {
         file_server
     }
 }
-
-https://fathom.nguyenhuythanh.com {
-    reverse_proxy islet-fathom:8080
-}
