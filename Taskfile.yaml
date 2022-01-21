@@ -1,0 +1,55 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  default:
+    cmds:
+      - task: build
+      - task: sync
+    silent: true
+
+  sync:
+    cmds:
+      - rsync -av site/public/ {{.USER}}@{{.HOST}}:{{.REMOTE_SITE_DIR}}
+      - echo
+      - echo "Synchronized to {{.HOST}} successfully!"
+    silent: true
+
+  bootstrap:
+    cmds:
+      - echo "Assure that you have `caddy` ready within the system"
+      - read -p "Press Enter to continue!"
+      - echo
+      - sudo cp Caddyfile /etc/caddy/Caddyfile
+      - echo "Copied Caddyfile to the default location"
+      - mkdir -p {{.REMOTE_SITE_DIR}}
+      - echo "Created folder for static files at {{.REMOTE_SITE_DIR}}"
+      - sudo chown {{.USER}}:{{.USER}} {{.REMOTE_SITE_DIR}}
+      - echo "Changed permission for the created folder"
+      - echo
+      - echo "Bootstrapped successfully!"
+    silent: true
+
+  open-site:
+    xdg-open http://localhost:1313
+
+  serve-site:
+    dir: ./site
+    cmds:
+      - hugo server -D
+
+  build:
+    cmds:
+      - task: build-site
+      - task: build-resume
+
+  build-site:
+    dir: ./site
+    cmds:
+      - hugo
+
+  build-resume:
+    dir: ./site/static
+    cmds:
+      - pdflatex resume.tex
