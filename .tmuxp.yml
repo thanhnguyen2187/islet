@@ -8,5 +8,5 @@ windows:
   panes:
   - shell_command: nvim -S
     focus: true
-  - shell_command: just serve-site
-  - shell_command: sleep 3 && just open-site
+  - shell_command: task serve-site
+  - shell_command: sleep 3 && task open-site && cd site

@@ -31,25 +31,29 @@ tasks:
       - echo "Bootstrapped successfully!"
     silent: true
 
-  open-site:
-    xdg-open http://localhost:1313
+  # site-related commands
+  open-site: xdg-open http://localhost:1313
 
   serve-site:
     dir: ./site
     cmds:
       - hugo server -D
 
-  build:
-    cmds:
-      - task: build-site
-      - task: build-resume
-
   build-site:
     dir: ./site
     cmds:
       - hugo
 
+  # resume-related commands
   build-resume:
     dir: ./site/static
     cmds:
       - pdflatex resume.tex
+
+  open-resume: xdg-open ./site/static/resume.pdf
+
+  # generic commands
+  build:
+    cmds:
+      - task: build-site
+      - task: build-resume
