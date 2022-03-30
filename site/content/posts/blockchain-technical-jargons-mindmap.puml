@@ -1,0 +1,14 @@
+@startmindmap
+* blockchain
+** "classical" blockchain: Bitcoin
+*** decentralized ledger
+*** proof of work
+**** miner
+** "generation 2" blockchain: Ethereum
+*** decentralized computer
+**** smart contract
+***** token
+***** non-fungible token (NFT)
+*** proof of stake
+**** validator
+@endmindmap
