@@ -2,10 +2,12 @@
 * blockchain
 ** "classical" blockchain: Bitcoin
 *** decentralized ledger
+*** immutable data
 *** proof of work
 **** miner
 ** "generation 2" blockchain: Ethereum
 *** decentralized computer
+*** immutable processing
 **** smart contract
 ***** token
 ***** non-fungible token (NFT)
