@@ -9,20 +9,20 @@ categories:
 ---
 
 I often introduced myself as a "backend spectrum Software Engineer", and
-(surprisingly) did accumulate quite a few knowledge on the landscape. My professional
-languages were Python and Golang mostly, but I can totally imagine working in
-backend of other languages is going to have the same "structure". In this post,
-I am going to show you the often be "met" parts/ideas of a backend project, in
-order to help you visualize a general "anatomy", or "structure" of such
-projects.
+(surprisingly) did accumulate quite a few knowledge on the landscape. My
+professional languages were Python and Golang mostly, but I can totally imagine
+working in backend of other languages is going to have the same "structure". In
+this post, I am going to show you the often be "met" parts/ideas of a backend
+project, in order to help you visualize a general "anatomy", or "structure" of
+such projects.
 
 Let us get started.
 
-## Layered Architecture
+## Layered Architecture, or Stratified Design
 
 Working in backend, we encounter quite a few architectures: Clean Architecture,
 Hexagonal Architecture, Onion Architecture, etc. One common pattern for them is:
-being multilayered, however.
+being multilayered, however. The authors' idea is simple: to split the code 
 
 | Clean Architecture | Onion Architecture | Column3 |
 |--------------------|--------------------|---------|
