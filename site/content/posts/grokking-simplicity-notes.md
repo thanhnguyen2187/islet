@@ -9,9 +9,39 @@ tags:
 categories:
 ---
 
+![grokking-simplicity-cover](../images/grokking-simplicity-cover.jpeg) 
+
 I wanted to put my notes into a separate repository, but then thought that
 writing the things on my blog is fine, too. Hence the post (and series)'s
 existence.
+
+## Final Verdict
+
+So having read through the book, I can highly recommend it to anyone who is
+interested in functional programming.
+
+- Newbies can learn a lot from the mentioned techniques and principles.
+- People who are a bit familiar with functional programming (like me) still can
+  find other parts to be useful and novel (on architectures and giving technical
+  jargons of functional programming "softer" names).
+
+The book has some parts that answer these two common concerns of non-functional
+programmers really well:
+
+- Inefficiencies/Performance Issues of Functional Programming
+- "Traditional" Layered Architecture versus Onion Architecture
+
+The aims of the book:
+
+> - [...] about practical uses of Functional Programming.
+> - [...] learn the skills and concepts you can apply today.
+
+Inspired me on a thinking that I found useful: Programming Paradigms are just...
+groups of programming techniques or tools. Just think about the techniques as
+*some* ways to group your code, or make the code clearer. Functional Programming
+solves some problem better/is more suited in some cases. Object-Oriented
+Programming also has its own benefits. "There is no silver bullet", I guess. It
+is up to us to find the pragmatic way to solve problems.
 
 ## Chapter 1: Welcome to Grokking Simplicity
 
@@ -459,7 +489,7 @@ function setShippingByName(cart, name, shipping) {
 > 3. Use new argument in body in place of hard-coded value
 > 4. Update the calling code
 
-```
+```js
 function setFieldByName(cart, name, field, value) {
     var item = cart[name];
     var newItem = objectSet(item, field, value);
@@ -475,7 +505,7 @@ function setFieldByName(cart, name, field, value) {
 > 3. Extract the body section into a function passed as an argument to that
 >    function.
 
-```
+```js
 // before
 function withLogging() {
     try {
@@ -537,7 +567,7 @@ I rarely think of writing them like `after`.
 
 > Two `map()` steps in a row:
 
-```
+```js
 // before
 var names = map(customers, getFullName);
 var nameLengths = map(customers, stringLength);
@@ -550,7 +580,7 @@ var nameLengths = map(customers, function(customer) {
 
 > Two `filters()` steps in a row
 
-```
+```js
 // before
 var goodCustomers = filter(customers, isGoodCustomer);
 var withAddresses = filter(customers, hasAddress);
@@ -563,7 +593,7 @@ var withAddresses = filter(customers, function(customer) {
 
 > `map()` step followed by `reduce()` step
 
-```
+```js
 // before
 var purchaseTotals = map(purchases, getPurchaseTotal);
 var purchaseSum = reduce(purchaseTotal, 0, plus);
@@ -930,3 +960,52 @@ and creating data pipelines.
 > provide the cart by fetching it from the database. Thus, the same work is
 > done, but in different layers. The fetching is done in the interaction layer
 > and the summing in the domain layer.
+
+### Onion Architcture "In Real Life"
+
+Here comes my favorite passage that embodies the goodness of the book: a lot of
+idealized and useful techniques that are combined with practical "real life"
+advices. The original title for the section is "Analyze Readability and
+Awkwardness", but I found my own title to be more on point.
+
+> [...] Sometimes the benefits of a particular paradigm are not worth the cost. This
+> includes choosing to implement parts of your domain as calculations. Even
+> though it's totally possible to implement your domain entirely as
+> calculations, we have to consider that sometimes, in a particular context, an
+> action is more readable than the equivalent calculation.
+>
+> Readability depends on quite a few factors. Here are some major ones:
+>
+> - The language you are writing in
+> - The libraries you are using
+> - Your existing legacy code and code style
+> - What your programmers are accustomed to
+>
+> The image of the onion architecture we've seen here is an *idealized* view of
+> a real system. People can easily tie themselves in knots trying to reach that
+> ideal of 100% purity of the onion architecture vision. However, nothing is
+> perfect. Part of your role as architect is to trade off between conformance
+> to the architecture diagram and real-world concerns.
+
+## The Functional Journey Ahead
+
+### Big Takeaways
+
+> - There are often calculations hidden in your actions
+> - Higher-order functions can reach new heights of abstraction
+> - You can control the temporal semantics of your code
+
+### The Ups And Downs Of Skill Acquisition
+
+![skill-enthusiasm-curves.png](../images/skill-enthusiasm-curves.png) 
+
+> Whenever we learn a new skill, we go through a similar process to make the
+> skill our own.
+>
+> - At first, we burn with the pleasure of new-found power. We seek to apply it
+>   everywhere, to play with our new toy.
+> - [...] we learn the limits of the new skill.
+> - Gradually, we understand where to apply the skill.
+> - We learn how it interacts with the other things we know.
+> - And we learn when not to apply it.
+
