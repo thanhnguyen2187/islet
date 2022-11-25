@@ -11,7 +11,6 @@ typing). I was born in 1997 in case you are a Vietnamese who wants to find a
 proper pronoun.
 
 I worked mostly as a Software Engineer in the backend spectrum. You are expected
-to find my rambles about frontend frameworks, or Vim, or topics outside of
 coding and software engineering here, however. You can see every category
 [here](/categories/), and all the tags [there](/tags/).
 
