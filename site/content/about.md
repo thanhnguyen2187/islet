@@ -11,8 +11,8 @@ typing). I was born in 1997 in case you are a Vietnamese who wants to find a
 proper pronoun.
 
 I worked mostly as a Software Engineer in the backend spectrum. You are expected
-coding and software engineering here, however. You can see every category
-[here](/categories/), and all the tags [there](/tags/).
+to see non-coding and software engineering related posts here, however. You can
+see every category [here](/categories/), and all the tags [there](/tags/).
 
 Please look at my [resume](/resume.pdf) or
 [LinkedIn](https://www.linkedin.com/in/nguyen-huy-thanh/) if you need
