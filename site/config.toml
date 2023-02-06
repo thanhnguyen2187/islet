@@ -61,6 +61,10 @@ enableGitInfo = true
     name       = "About"
     url        = "about/"
   [[menu.main]]
+    identifier = "portfolio"
+    name       = "Portfolio"
+    url        = "portfolio/"
+  [[menu.main]]
     identifier = "posts"
     name       = "Posts"
     url        = "posts/"
