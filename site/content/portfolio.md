@@ -1,7 +1,7 @@
 ---
-title: "Software Portfolio"
+title: "Software Portfolio (WIP)"
 date: 2022-11-25T17:50:07+07:00
-draft: true
+draft: false
 toc: true
 tags:
 - software
@@ -9,14 +9,63 @@ tags:
 categories:
 ---
 
-I am going to list software projects (professionally or hobby) that I have
+## TL;DR (3/2/2023)
+
+I am a Fullstack Software Engineer, who has mostly worked in the backend
+spectrum, and is comfortable with most layers of modern web development
+(frontend, backend, and platform/DevOps). I am having a strong preference in
+jobs that:
+
+1. Are fully remote or hybrid
+2. Are blockchain-related: I worked with blockchain and found the technology
+   fascinating and have a bright future ahead
+3. Leverage esoteric functional programming languages: Clojure is a favorite
+   niche language of mine, but I am open to other languages like Scala or F# as
+   well
+4. Allow me to go into a lower layer of programming: I did some bit diddling
+   in a side project, and really like the idea of working on core libraries and
+   applying algorithms to solve challenging technical problems
+5. Allow me to take the first step at leading or managing a small team:
+   management skills and leadership skills are things that I want to develop as
+   well
+
+Please be noted that: it is not a dealbreaker if the job does not meet all
+of them. Please do contact me if you think there is a good enough fit for both
+sides.
+
+I am going to list software projects (professional or personal) that I have
 worked on and what I contributed. The purpose is mainly to make it easier for my
 readers (future employers hopefully) to see what I have done, evaluate my
-technical skills, and decide that I am a good fit or not.
+technical skills, and decide that I am a suitable candidate or not.
+
+## Mones
+
+The product is originally called Ceres M, a "traditional Web2 game", which
+underwent:
+
+- In-game balance patches
+- Various UX improvements
+- Various blockchain integration implementations
+
+To become a "Web3 Play-N-Earn game" on BNB Chain. The differences are:
+
+- Using cryptocurrencies to replace traditional top-up payments
+- Turning in-game items to NFTs and building an NFT marketplace to replace
+  traditional game marketplaces
+
+### Data Synchronization for NFT Marketplace
+
+Problem: originally, once 
+
+Technologies used: 
+
+## Oxalus Platform
+
+### Smart Contract Events Synchronization
 
 ## Minh Phu Analytics
 
-The project aimed to aid Minh Phu, one of the biggest sea food corporate in
+The product aimed to aid Minh Phu, one of the biggest sea food corporate in
 Vietnam and in the world, on:
 
 - Market Analytics
@@ -172,16 +221,9 @@ Challenges:
 
 Technologies used: Python, pandas, sklearn, and statsmodels.
 
-## "DevOps"
+## Side Projects
 
-The term "DevOps" is not the right one technically, I know, but I had a hard
-time grouping these pieces. They are half "what I learned", and half "what am I
-capable of", all related to software deployment and operation.
-
-### *.nguyenhuythanh.com
-
-I built, deployed, and managed this website (and a few others) all under a cheap
-VPS. The model for this website is:
+### Personal Blog
 
 ```goat
 +-------+ request  +---+ nguyenhuythanh.com +-----+     +------+
@@ -190,17 +232,17 @@ VPS. The model for this website is:
                                                         +------+
 ```
 
-The model for analytics.nguyenhuythanh.com is:
+Technologies used: Hugo, Caddy, systemd.
 
-```goat
-+-------+ request  +---+ analytics.nguyenhuythanh.com +-----+     +-----------+
-|Devices|<-------->|DNS|<---------------------------->|Caddy|<--->|Self-hosted|
-+-------+ response +---+                              +-----+     |Umami      |
-                                                                  +-----------+
-```
-(see the dashboard for this site [here](https://analytics.nguyenhuythanh.com/websites/260ae155-57fc-4eb6-95a8-18ea8fc6fc56/Islet))
+### Darkest Savior
 
-### GitOps
+TBA
+
+### Esoterica
+
+TBA
+
+## GitOps
 
 Disclaimer: I encountered this model at two places, and dabbled a bit on one
 that was built from scratch. I know how it works in theory, but not in details.
