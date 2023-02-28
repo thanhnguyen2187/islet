@@ -8,9 +8,10 @@ categories:
 tags:
 ---
 
-I think I got asked the question twice or thrice in my interviews, and could not
-come up with a good enough answer. Recently, I found one such mildly interesting
-technical challenge, and wanted to jot it down before it faints from my mind.
+I thought the question about a challenge that I faced was asked in my interviews
+twice or thrice, and could not come up with a good enough answer. Recently, I
+found one such mildly interesting technical challenge, and wanted to jot it down
+before it faints from my mind.
 
 ## Context
 
@@ -31,18 +32,18 @@ The "data flow" is also a "typical" one:
 
 ```
 [Blockchain] --(1)--> [Event Queue] --(2)--> [Data Storage]
-```
 
-The "processing" within the data flow is also quite "normal":
-
-```
 (1): A service named "Mediator", which periodically fetches events from
 blockchain, does simple processing, and saves the data to an event queue (Kafka)
 
 (2): Four services, sequentially are "Enricher", "Metadata", "Master Data", and
 "Marketplace", interact with each other to make sure that in the end, there is
 ready-for-serve data within "Data Storage" (Elasticsearch in this case)
+```
 
+The "processing" within the data flow is also quite "normal":
+
+```
 [Event Queue] --(1)--> [Enricher] <--(2)-- [Master Data]
                           |   ^
                           |   |
