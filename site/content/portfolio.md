@@ -20,8 +20,8 @@ jobs that:
 2. Are blockchain-related: I worked with blockchain and found the technology
    fascinating and have a bright future ahead
 3. Leverage esoteric functional programming languages: Clojure is a favorite
-   niche language of mine, but I am open to other languages like Scala or F# as
-   well
+   niche language of mine, but I am open to other functional programming
+   languages like Haskell or Elixir or Scala or F# as well
 4. Allow me to go into a lower layer of programming: I did some bit diddling
    in a side project, and really like the idea of working on core libraries and
    applying algorithms to solve challenging technical problems
@@ -53,15 +53,193 @@ To become a "Web3 Play-N-Earn game" on BNB Chain. The differences are:
 - Turning in-game items to NFTs and building an NFT marketplace to replace
   traditional game marketplaces
 
-### Data Synchronization for NFT Marketplace
+### Smart Contract Events Data Synchronization for NFT Marketplace
 
-Problem: originally, once 
+#### Problem
 
-Technologies used: 
+The game's NFT marketplace is essentially a smart contract. End user can
+interact with the blockchain directly via JSON RPC calls to smart contracts, but
+it is not friendly enough in terms of speed and UX. 
 
-## Oxalus Platform
+#### Solution
 
-### Smart Contract Events Synchronization
+Implement various services to synchronize on-chain data with a "local" database,
+and serve the data to a user-friendly frontend.
+
+#### Implementation
+
+I took part in the design, and implemented a few services and functionalities of
+the overall system.
+
+- Without the data synchronization:
+
+```goat
++----------+ +------------+                                                     
+| End User | | Blockchain |
++----+-----+ +------+-----+
+     |              |
+     | interact     |
+     +------------->|
+     |              |
+     |              |
+     |              |
+     |              |
+     |              |
+     |              |
+```
+
+- With the data synchronization:
+
+```goat
++----------+ +-----------+ +-----+ +----------+ +-----------------+ +------------+
+| End User | | Front end | | API | | Database | | Synchronization | | Blockchain |
++----+-----+ +-----+-----+ +--+--+ +-----+----+ |    Services     | +------+-----+
+     |             |          |          |      +--------+--------+        |
+     |             |          |          |               |                 |
+     | interact    |          |          |               | query data      |
+     +------------>|          |          |               |<--------------->|
+     |             | request  |          | upsert data   |                 |
+     |             | data     |          |<------------->|                 |
+     |             |<-------->|          |               |                 |
+     |             |          | query    |               |                 |
+     |             |          | data     |               |                 |
+     |             |          |<-------->|               |                 |
+     |             |          |          |               |                 |
+     |             |          |          |               |                 |
+     |             |          |          |               |                 |
+```
+
+- Details of the data synchronization:
+
+```goat
++----------+ +----------+ +----------+ +-------------+ +----------+ +------------+
+| Database | | Internal | | Enricher | | Event Queue | | Mediator | | Blockchain |
++----+-----+ |   API    | +----+-----+ +------+------+ +----+-----+ |    Node    |
+     |       +----+-----+      |              |             |       +-----+------+
+     |            |            |              |             |             |
+     |            |            |              |             | fetch       |
+     |            |            |              |             | events      |
+     |            |            |              |             |<------------+
+     |            |            |              | push        |             |
+     |            |            |              | events      |             |
+     |            |            |              |<------------+             |
+     |            |            | receive      |             |             |
+     |            |            | events       |             |             |
+     |            |            |<-------------|             |             |
+     |            |            |              |             |             |
+     |            |            | enrich       |             |             |
+     |            |            | game data    |             |             |
+     |            |            | and metadata |             |             |
+     |            |            +---------+    |             |             |
+     |            |            |         |    |             |             |
+     |            |            |<--------+    |             |             |
+     |            | upsert     |              |             |             |
+     |            | data       |              |             |             |
+     |            |<-----------+              |             |             |
+     | upsert     |            |              |             |             |
+     | data       |            |              |             |             |
+     |<-----------+            |              |             |             |
+     |            |            |              |             |             |
+```
+
+Technologies used: Golang, Elasticsearch, TypeScript, web3.js
+
+#### Challenges
+
+- Race Condition Between Enricher, Internal API, and Database
+
+I had a more detailed post
+[here](/posts/a-mildy-interesting-technical-challenge/), but it can be turned in
+short to this:
+
+1. Enricher sometimes handles events too fast that the requests it send to
+   Internal API can be considered come simultaneously
+2. Internal API also handles the requests simultaneously
+3. The handling creates a case where two threads write to the database at once
+4. In the end, the concurrent writing from two threads creates inconsistent
+   states
+
+To solve this issue, at step `3.`, I changed the implementation from updating
+the whole record to update one field only.
+
+## Oxalus NFT Aggregator
+
+The name "Oxalus" a brand for a suite of NFT-related products, namely:
+
+- Oxalus Games: NFT games including Mones, Gunfire Hero, and StepHero.
+- Oxalus Wallet: a wallet for NFTs
+- Oxalus Analytics: NFT data insights
+- Oxalus NFT Aggregator: NFT marketplaces data aggregator
+
+As for Oxalus NFT Aggregator, it was created to address user's problem on
+browsing and buying NFT on multiple marketplaces. It also allows them to save
+gas fee by purchasing multiple NFTs at once.
+
+- Before having NFT Aggregator:
+
+```goat
++------+ +---------------+ +---------------+ +---------------+
+| User | | Marketplace 1 | | Marketplace 2 | | Marketplace 3 |
++--+---+ +-------+-------+ +-------+-------+ +-------+-------+
+   |             |                 |                 |
+   | browse      |                 |                 |
+   |<----------->|                 |                 |
+   | buy NFT     |                 |                 |
+   |<----------->|                 |                 |
+   |             |                 |                 |
+   |             |                 |                 |
+   | browse      |                 |                 |
+   |<------------|---------------->|                 |
+   | buy NFT     |                 |                 |
+   |<------------|---------------->|                 |
+   |             |                 |                 |
+   |             |                 |                 |
+   | browse      |                 |                 |
+   |<------------|-----------------|---------------->|
+   | buy NFT     |                 |                 |
+   |<------------|-----------------|---------------->|
+```
+
+- After having NFT Aggregator:
+
+```goat
++------+ +----------------+ +---------------+ +---------------+
+| User | | NFT Aggregator | | Marketplace 1 | | Marketplace 2 |
++--+---+ +--------+-------+ +-------+-------+ +-------+-------+
+   |              |                 |                 |
+   |              | crawl           |                 |
+   |              | data            |                 |
+   |              |<--------------->|                 |
+   |              |                 |                 |
+   |              | crawl           |                 |
+   |              | data            |                 |
+   |              |<----------------|---------------->|
+   |              |                 |                 |
+   | browse       |                 |                 |
+   |<------------>|                 |                 |
+   | buy NFT      |                 |                 |
+   |<------------>|                 |                 |
+   |              |                 |                 |
+   |              |                 |                 |
+```
+
+### Data Synchronization for Oxalus NFT Aggregator
+
+#### Problem
+
+WIP
+
+#### Solution
+
+WIP
+
+#### Implementation
+
+WIP
+
+#### Challenges
+
+WIP
 
 ## Minh Phu Analytics
 
@@ -73,15 +251,19 @@ Vietnam and in the world, on:
 
 ### Scheduled News Aggregation
 
-Problem: Minh Phu's staffs watch the market from various sources everyday,
-and need a more convenient way to do so.
+#### Problem
 
-Solution: build simple services to aggregate (crawl) news from various
-sources.
+Minh Phu's staffs watch the market from various sources everyday, and need a
+more convenient way to do so.
 
-Implementation: I designed, implemented, and deployed services which
-schedules and dispatches crawling workers. The overall model was something like
-this:
+#### Solution
+
+Build simple services to aggregate (crawl) news from various sources.
+
+#### Implementation
+
+I designed, implemented, and deployed services which schedules and dispatches
+crawling workers. The overall model was something like this:
 
 ```goat
 +-------------+ conf +---------+ jobs +---------+ job  +--------+      +--------+
@@ -105,7 +287,7 @@ The workers are going to fetch news from various websites, and then put the
 fetched data into a database. A queue is needed to scale the fetching
 horizontally.
 
-Challenges: 
+#### Challenges
 
 - Make sure that Scheduler is in synchronization with Configuration Database.
   The strategy is:
@@ -137,7 +319,7 @@ Challenges:
       scheduler.add_job(crawl, kwargs={url: url})
   ```
   
-  The "magic" comes Python's allowance for dynamic parameters:
+  The "magic" comes from Python's allowance for dynamic parameters:
 
   ```python
   def f(a, b):
@@ -156,13 +338,50 @@ APScheduler, BeautifulSoup, and Selenium.
 
 ### Time Series Prediction
 
-Problem: Minh Phu has seafood production related data of the past, and they want
+#### Problem
+
+Minh Phu has seafood production related data of the past, and they want
 to use the data to predict future price.
 
-Solution: implement a service which allows user to rapidly try out different
+#### Solution
+
+Implement a service which allows user to rapidly try out different
 combinations of models and data column.
 
-Implementation:
+```goat
++------+       +--------+     +----------+                                          
+| User |       | System |     | Database |
++--+---+       +---+----+     +----+-----+
+   |               |               |
+   | save          |               |
+   | configuration |               |
+   +-------------->|               |
+   |               |               |
+   |               | save          |
+   |               | configuration |
+   |               +-------------->|
+   |               |               |
+   | execute       |               |
+   | prediction    |               |
+   +-------------->|               |
+   |               |               |
+   |               | fetch         |
+   |               | data          |
+   |               |<------------->|
+   |               |               |
+   |               | apply         |
+   |               | algorithm     |
+   |               +-----+         |
+   |               |     |         |
+   |               |<----+         |
+   |               |               |
+   | see           |               |
+   | visualization |               |
+   +-------------->|               |
+   |               |               |
+```
+
+#### Implementation
 
 Assuming we have this data:
 
@@ -207,7 +426,7 @@ The service then expose these options for the "numbers finding" process:
 - Columns to use
 - Time range
 
-Challenges:
+#### Challenges
 
 - Data Wrangling: listing the steps is easy, but I could recall that I struggled
   a lot, even though it sounded simple.
@@ -242,7 +461,11 @@ TBA
 
 TBA
 
-## GitOps
+## Miscellanies
+
+WIP
+
+### GitOps
 
 Disclaimer: I encountered this model at two places, and dabbled a bit on one
 that was built from scratch. I know how it works in theory, but not in details.
