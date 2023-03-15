@@ -162,20 +162,23 @@ short to this:
 To solve this issue, at step `3.`, I changed the implementation from updating
 the whole record to update one field only.
 
-## Oxalus NFT Aggregator
+## Oxalus
 
 The name "Oxalus" a brand for a suite of NFT-related products, namely:
 
 - Oxalus Games: NFT games including Mones, Gunfire Hero, and StepHero.
 - Oxalus Wallet: a wallet for NFTs
 - Oxalus Analytics: NFT data insights
+
+The product aimed to provides users with insights on NFT activities.
+
 - Oxalus NFT Aggregator: NFT marketplaces data aggregator
 
 As for Oxalus NFT Aggregator, it was created to address user's problem on
 browsing and buying NFT on multiple marketplaces. It also allows them to save
 gas fee by purchasing multiple NFTs at once.
 
-- Before having NFT Aggregator:
+Before having NFT Aggregator:
 
 ```goat
 +------+ +---------------+ +---------------+ +---------------+
@@ -200,7 +203,7 @@ gas fee by purchasing multiple NFTs at once.
    |<------------|-----------------|---------------->|
 ```
 
-- After having NFT Aggregator:
+After having NFT Aggregator:
 
 ```goat
 +------+ +----------------+ +---------------+ +---------------+
@@ -223,7 +226,10 @@ gas fee by purchasing multiple NFTs at once.
    |              |                 |                 |
 ```
 
-### Data Synchronization for Oxalus NFT Aggregator
+### ERC-721 and ERC-1155 EVM Event Data Synchronization for Oxalus Analytics and Oxalus Wallet
+
+Disclaimer: I am not the one who implemented the whole system, but I fixed a few
+complicated bugs of it.
 
 #### Problem
 
@@ -239,7 +245,8 @@ WIP
 
 #### Challenges
 
-WIP
+It is well-known that data of blockchain is immutable, or is unchanged once
+"written down" 
 
 ## Minh Phu Analytics
 
@@ -289,8 +296,8 @@ horizontally.
 
 #### Challenges
 
-- Make sure that Scheduler is in synchronization with Configuration Database.
-  The strategy is:
+- Make sure that Scheduler is in synchrony with Configuration Database. The
+  strategy is:
   - On Scheduler starting: fetch every configuration rows and do the scheduling
     normally.
   - On updates occurs to any configuration row: send a message to the scheduler
