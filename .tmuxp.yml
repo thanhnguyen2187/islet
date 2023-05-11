@@ -3,7 +3,7 @@ windows:
 - window_name: site
   layout: main-horizontal
   options:
-    main-pane-height: 38
+    main-pane-height: 32
     automatic-rename: 'off'
   panes:
   - shell_command: nvim -S
