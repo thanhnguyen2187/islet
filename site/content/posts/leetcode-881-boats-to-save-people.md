@@ -37,7 +37,9 @@ limit = 3
 
 # explanation
 # 
-# The boat can contains one people in this case
+# There is only one boat in this case:
+#
+# - [1, 2]
 ```
 
 ```python
