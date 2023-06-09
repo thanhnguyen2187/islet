@@ -922,6 +922,42 @@ is from Raft's paper itself that the author
 
 ![raft-states](../images/raft-states.png)
 
+Tried to implement a Raft leader election simulation for learning purpose, I
+will try to put Raft's ideas to a more coherent form for implementation:
+
+Suppose we have a *system* that consists of *processes* (the *processes* are
+computation units that have their own states and can send messages to themselves
+or to other processes)
+
+Each process can be in one of three states:
+
+- The *follower state*: the process recognizes another process as the leader
+- The *candidate state*: the process tries to elect itself (or another process) as
+  the leader
+- The *leader state*: the process is the leader, and it sends heartbeats to
+  other processes
+
+At the beginning, all processes are followers.
+
+A process changes its state following the state diagram above, or:
+- Follower -> Candidate: if it does not receive a heartbeat after a fixed time
+- Candidate -> Leader: its vote count is the highest
+- Any -> Follower: it receive a "new" heartbeat
+
+How do we know if a heartbeat is "new"? The answer is that each process has a
+logical timestamp called "election term". The processes will comply to "newer
+messages" (or messages that have greater election term).
+
+Here are the message types:
+
+- Timeout: a follower sends this to itself to change its state to candidate
+- Hearbeat: the leader sends this to other followers
+- Vote Request: a candidate sends this to other processes
+- Promotion: a candidate sends this to itself after it received enough vote
+
+We see the Cartesian product of the message types and the process types to see
+how should we handle each case:
+
 ### 9.2 Practical considerations
 
 > There are other leader election algorithms out there, but Raft's
@@ -992,4 +1028,429 @@ nice-to-know, but I did not think that I needed it right then.
 
 There is a minor typo in this page: the author wrote "this this mechanism is
 called stated machine".
+
+### 10.1 State machine replication
+
+> When the system starts up, a leader is elected using Raft's leader election
+> algorithm discussed in chapter 9, which doesn't require any external
+> dependencies. The leader is the only process that can change the replicated
+> state. It does so by storing the sequence of operations that alter the state
+> into a local *log*, which it replicates to the followers. Replicating the log
+> is what allows the state to be kept in sync across processes.
+>
+> [...], a log is an ordered list of entries where each entry includes:
+>
+> * the operation to be applied to the state, [...]. The operation needs to be
+>   deterministic so that all followers end up in the same state, but it can be
+>   arbitrarily compex as long as the requirement is respected (e.g.,
+>   compare-and-swap or a transaction with multiple operations);
+> * the index of the entry's position in the log;
+> * and the leader's election term (the number in each box).
+>
+> ![raft-log-replication](../images/raft-log-replication.png)
+>
+> When the leader wants to apply and operation to its local state, it first
+> appends a new entry for the operation to its log. At this point, the operation
+> hasn't been applied to the local state just yet; it has only been logged.
+>
+> The leader then sends an *AppendEntries* request to each follower with the new
+> entry to be added. This message is also sent out periodically, even in the
+> absence of new entries, as it acts as a *heartbeat* for the leader.
+>
+> When a follower receives an *AppendEntries* request, it appends the entry it
+> received to its own log (without actually executing the operation yet) and
+> sends back a response to the leader to acknowledge that the request was
+> successful. When the leader hears back successfully from a majority of
+> followers, it considers the entry to be committed and executes the operation
+> on its local state. The leader keeps track of the highest committed index in
+> the log, which is sent in all future *AppendEntries* requests. A follower only
+> applies a log entry to its local state when it finds out that the leader has
+> committed the entry.
+>
+> Because the leader needs to wait for *only* a majority (quorum) of followers,
+> it can make progress even if some are down, i.e., if there are *2f + 1*
+> followers, the system can tolerate up to *f* failures. The algorithm
+> guarantees that an entry that is committed is durable and will eventually be
+> executed by all the processes in the system, not just those that were part of
+> the original majority.
+>
+> So far, we have assumed there are no failures, and the network is reliable.
+> Let's relax those assumptions. If the leader fails, a follower is elected as
+> the new leader. But, there is a caveat: because the replication algorithm only
+> needs a majority of processes to make progress, it's possible that some
+> processes are not up to date when a leader fails. To avoid an out-of-date
+> process becoming the leader, a process can't vote for one with a less
+> up-to-date log. In other words, a process can't win an election if it doesn't
+> contain all committed entries.
+>
+> To determine which of two processes' logs is more up-to-date, the election
+> term and index of their last entries are compared. If the logs end with
+> different terms, the log with the higher terms is more up to date. If the logs
+> end with the same term, whichever log is longer is more up to date. Since the
+> election requires a majority vote, and a candidate's log must be at least as
+> up to date as any other process in that majority to win the election, the
+> elected process will contain all committed entries.
+>
+> If an *AppendEntries* request can't be delivered to one or more followers, the
+> leader will retry sending it indefinitely until a majority of the followers
+> have successfully appended it to their logs. Retries are harmless as
+> *AppendEntries* requests are idempotent, and follower ignore log entries that
+> have already been appended to their logs.
+>
+> If a follower that was temporarily unavailable comes back online, it will
+> eventually receive an *AppendEntries* message with a log entry from the
+> leader. The *AppendEntries* message includes the index and term number of the
+> entry in the log that immediately precedes the one to be appended. If the
+> follower can't find a log entry with that index and term number, it rejects
+> the message to prevent creating a gap in its log.
+>
+> When the *AppendEntries* request is rejected, the leader retries the request,
+> this time including the last two log entries -- this is why we referred to the
+> request as *AppendEntries* and not as *AppendEntry*. If that fails, the leader
+> retries sending the last three log entries and so forth. The goal is for the
+> leader to find the latest log entry where the two logs agree, delete any
+> entries in the follower's log after that point, and append to the follower's
+> log all of the leader's entries after it.
+
+### 10.2 Consensus
+
+> By solving state machine replication, we actually found a solution to
+> *consensus* -- a fundamental problem studied in distributed systems research
+> in which a group of processes has to decide a value so that:
+>
+> - every non-faulty process eventually agrees on a value;
+> - the final decision of every non-faulty process is the same everywhere;
+> - and the final value that has been agreed on has been proposed by a process.
+>
+> [...] Another way to think about consensus is the API of a write-once register
+> (WOR): a thread-safe and linearizable register that can only be written once
+> but can be read many times.
+
+I thought this is the second time the author mentions the word "linearizable". I
+got curious about it and read ahead. So "linearizability" is related to
+"consistency models", and it is the strongest form of consistency. [Another
+source](https://www.educative.io/answers/what-is-linearizability-in-distributed-systems)
+explains it as "all operations are executed in a way as if executed on a single
+machine, despite the data being distributed across multiple replicas. As a
+result, every operation returns an up-to-date value."
+
+> There are plenty of practical applications of consensus. For example, agreeing
+> on which process in a group and acquire a lease requires consensus. And, as
+> mentioned earlier, state machine replication also requires it. If you squint a
+> little, you should be able to see how the replicated log in Raft is a sequence
+> of WORs, and so Raft is really just a sequence of consensus instances.
+
+### 10.3 Consistency models
+
+The author took two examples, which I will explain in my own words below.
+
+In the single machine/single-threaded case, the actions that we take are
+"seemingly" instaneous (after writing, the state change immediately). 
+
+```goat
++--------+          +---------+                                                 
+| Client |          | Machine |
++---+----+          +----+----+
+    |                    |
+    |    write(x, 1)     |
+    +------------------->|
+    |                    |
+    |     read(x)        |
+    +------------------->|
+    |                    |
+    |         1          |
+    |<-------------------+
+    |                    |
+    |                    |
+```
+
+In the case where the state is replicated, it is not the same. Let us assume
+that we have a multiple-node system that implement Raft leader election and Raft
+state machine replication. Write requests are then served by the leader only.
+Having read requests also served by the leader only seems unintuitive since it
+limits the system's capability. If the read requests are served by followers,
+there can be the case where the follower does not have the latest data, and it
+leads to inconsistency.
+
+```goat
++--------+          +--------+                                                  
+| Client |          | System |
++---+----+          +---+----+
+    |                   |
+    |    write(x, 1)    |
+    +------------------>|
+    |                   |
+    |                   | synchronization()
+    |                   +-------------------+
+    |                   |                   |
+    |      read(x)      |                   |
+    +------------------>|                   |
+    |                   |                   |
+    |         ?         |                   |
+    |<------------------+                   |
+    |                   |                   |
+    |                   |                   |
+    |                   |<------------------+
+    |                   |
+    |     read(x)       |
+    +------------------>|
+    |                   |
+    |         1         |
+    |<------------------+
+    |                   |
+    |                   |
+```
+
+> Intuitively, there is a tradeoff between how consistent the observers' views
+> of the system are and the system's performance and availability. To understand
+> this relationship, we need to define precisely what we mean by consistency. We
+> will do so with the help of *consistency models*, which formally define the
+> possible views the observers can have of the system's state.
+
+#### 10.3.1 Strong consistency
+
+It is the model that is similar to the first diagram of the previous explanation
+that I gave. Another word for strong consistency is *linearizability*.
+
+#### 10.3.2 Sequential consistency
+
+> The consistency model that ensures operations occur in the same order for all
+> observers, but doesn't provide any real-time guarantee about when an
+> operation's side-effect becomes visible to them, is called *sequential
+> consistency*. The lack of real-time guarantees is what differentiates
+> sequential consistency from linearizability.
+>
+> ![sequential-consistency](../images/sequential-consistency.png) 
+>
+> A producer / consumer system synchronized with a queue is an example of this
+> model; a producer writes items to the queue, which a consumer reads. The
+> producer and the consumer see the items in the same order, but the consumer
+> lags behind the producer.
+
+#### 10.3.3 Eventual consistency
+
+> Although we managed to increase the read throughput, we had to pin clients to
+> followers -- if a follower becomes unavailable, the client loses access to the
+> store. We could increase the availability by allowing the client to query any
+> follower. But this comes at a steep price in terms of consistency. For
+> example, say there are two followers, 1 and 2, where follower 2 lags behind
+> follower 1. If a client queries follower 1 and then follower 2, it will see an
+> earlier state, which can be very confusing. The only guarantee the client has
+> is that eventually all followers will converge to the final state if writes to
+> the system stop. This consistency model is called *eventual consistency*.
+>
+> It's challenging to build applications on top of an eventually consistent data
+> store because the behavior is different from what we are used to when writing
+> single-threaded applications. As a result, subtle bugs can creep up that are
+> hard to debug and reproduce. Yet, in eventual consistency's defense, not all
+> applications require lineariability. For example, an eventually consistent
+> store is perfectly fine if we want to keep track of the number of users
+> visiting a website, since it doesn't really matter if a read returns a number
+> that is slightly out of date.
+
+#### Notes
+
+I cannot differentiate sequential consistency and eventual consistency. I feel
+like they might be something related to... state building. Suppose our state is
+a single number `x`. We also have operations `ops` to modify `x`.
+
+If `ops` only consists of `+` operations, for example:
+
+```
++1
++3
++2
++9
+```
+
+Then if we look at the final state, it doesn't matter if `+1` is applied before
+or after `+9`. In mathematics's terminology, the operations are "associative".
+The system can be "eventual consistency" here. 
+
+If `ops` consists of `+`, `-`, `*`, and `/` operations, for example:
+
+```
++1
+*3
+/5
+-9
+*9
+```
+
+Then suddenly, the order matters. `(x + 1) * 3` is different from `(x * 3) + 1`.
+"Sequential consistency" is needed.
+
+#### 10.3.4 The CAP theorem
+
+> When a network partition happens, parts of the system become disconnected from
+> each other. For example, some clients might no longer be able to reach the
+> leader. The system has two choices when this happens; it can either:
+>
+> - remain available by allowing clients to query followers that are reachable,
+>   sacrificing strong consistency
+> - or guarantee strong consistency by failing reads that can't reach the
+>   leader.
+>
+> The concept is expressed by the *CAP theorem*, which can be summarized as:
+> "strong consistency, availability, and partition tolerance: pick two out of
+> three." In reality, the choice really is on between consistency and
+> availability, as network faults are a given an can't be avoided.
+>
+> [...]
+
+I think this explanation from Wikipedia is more on-point:
+
+- Consistency: every read receives the most recent write or an error
+- Availability: every request receives a (non-error) response, without the
+  guarantee that it contains the most recent write.
+- Partition tolerance: the system continues to operate despite an arbitrary
+  number of messages being dropped (or delayed) by the network between nodes
+
+No distributed system is safe from network failures, thus network partitioning
+generally has to be tolerated. In the presence of a partition, one is then
+left with two options: consistency or availability.
+
+- When choosing consistency over availability, the system will return an error
+  or a time out if particular information cannot be guaranteed to be up to date
+  due to network partitioning.
+- When choosing availability over consistency, the system will always process
+  the query and try to return the most recent available version of the
+  information, even if it cannot guarantee it is up to date due to network
+  partitioning.
+
+> Also, even though network partitions can happen, they are usually rare within a
+> data center. But, even in the absence of a network partition, there is a
+> tradeoff between consistency and *latency* (or performance). The stronger the
+> consistency guarantee is, the higher the latency of individual operations must
+> be. This relationship is expressed by the *PACELC theorem*, an extension to
+> the CAP theorem. It states that:
+>
+> - In the case of network partitioning (P), one has to choose between:
+>   - Availability (A) and
+>   - Consistency (C)
+> - But else (E), even when the system is running normally in the absence of
+>   partitions, one has to choose between:
+>   - Latency (L) and
+>   - Consistency (C)
+>
+> In practice, the choice between latency and consistency is not binary but
+> rather a spectrum.
+>
+> This is why some off-the-shell distributed data stores come with
+> counter-intuitive consistency guarantees in order to provide high availability
+> and performance. Others have knobs that allow you to chooose whether you want
+> better performance or stronger consistency guarantees [...].
+>
+> Another way to interpret the PACELC theorem is that there is a trade-off
+> between the amount of coordination required and performance. One way to design
+> around this fundamental limitation is to move coordination away from the
+> critical path. For example, earlier we discussed that for a read to be
+> strongly consistent, the leader has to contact a majority of followers. That
+> coordination tax is paid for each read! In the next section, we will explore a
+> different replication protocol that moves this cost away from the critical
+> path.
+
+### 10.4 Chain replication
+
+> [...]. In chain replication, processes are arranged in a chain. The leftmost
+> process is referred to as the chain's *head*, while the rightmost one is the
+> chain's *tail*.
+>
+> Clients send writes exclusively to the head, which updates its local state and
+> forwards the update to the next process in the chain. Similarly, that process
+> updates its sate and forwards the chain to its successor until it eventually
+> reaches the tail.
+>
+> When the tail receives an update, it applies it locally and sends an
+> acknowledgement to its predecessor to signal that the change has been
+> committed. The acknowledgement flows back to the head, which can then reply to
+> the client that the write succeeded.
+>
+> Client reads are served exclusively by the tail [...]. In the absence of
+> failures, the protocol is strongly consistent as all writes and reads are
+> processed one at a time by the tail. But what happens if a process in the
+> chain fails?
+>
+> Falut tolerance is delegated to a dedicated component, the configuration
+> manager or *control plane*. At a high level, the control plane monitors the
+> chain's health, and when it detects a faulty process, it removes it from the
+> chain. The control plane ensures that there is a single view of the chain's
+> topology that every process agrees with. For this to work, the control plane
+> needs to be fault-tolerant, which requires state machine replication (e.g.,
+> Raft). So while the chain can tolerate up to *N - 1* processes failing, where
+> *N* is the chain's length, the control plane can only tolerate *C / 2*
+> failures, where *C* is the number of replicas that make up the control plane.
+>
+> There are three failure modes in chain replication:
+>
+> - The head can fail,
+> - The tail can fail, or
+> - An intermediate process can fail.
+>
+> If the head fails, the control plane removes it by reconfiguring its successor
+> to be the new head and notifying clients of the change. If the head committed
+> a write to its local state but crashed before forwarding it downstream, no
+> harm is done. Since the write didn't reach the tail, the client that issued it
+> hasn't received an acknowledgement for it yet. From the client's perspective,
+> it's just a request that timed out and needs to be retried. Similarly, no
+> other client will have seen the write's side effects since it never reached
+> the tail.
+>
+> If the tail fails, the control plane removes it and makes its predecessor the
+> chain's new tail. Because all updates that the tail has received must
+> necessarily have been received by the predecessor as well, everything works as
+> expected.
+>
+> If an intermediate process *X* fails, the control plane has to link *X*'s
+> predecessor with *X*'s successor. This case is a bit trickier to handle since
+> *X* might have applied some updates locally but failed before forwarding them
+> to its successor. Therefore, *X*'s successor needs to communicate to the
+> control plane the sequence number of the last committed update it has seen,
+> which is then passed to *X*'s predecessor to send the missing updates
+> downstream.
+>
+> Chain replication can tolerate up to *N - 1* failures. So, as more processes
+> in the chain fail, it can tolerate fewer failures. This is why it's important
+> to replace a failing process with a new one. This can be accomplished by
+> making the new process the tail of the chain after syncing it with its
+> predecessor.
+>
+> The beauty of chain replication is that there are only a handful of simple
+> failure modes to consider. That's because for a write to commit, it needs to
+> reach the tail, and consequently, it must have been processed by every process
+> in the chain. This is very different from a quorum-based replication protocol
+> like Raft, where only a subset of replicas may have seen a committed write.
+>
+> Chain replication is simpelr to understand and more performant than
+> leader-based replication since the leader's job of serving client requests is
+> split among the head and the tail. The head sequences writes by updating its
+> local state and forwarding updates to its successor. Reads, however, are
+> served by the tail, and are interleaved with updates received from its
+> predecessor. Unlike Raft, a read request from a client can be served
+> immediately from the tail's local state without contacting the other replicas
+> first, which allows for higher throughput and lower response times.
+>
+> However, there is a price to pay in terms of write latency. Since an update
+> needs to go through all the processes in the chain before it can be considered
+> committed, a single slow replica can slow down all writes. In contrast, in
+> Raft, the leader only has to wait for a majority of processes to reply and
+> therefore is more resilient to transient degradations. Additionally, if a
+> process isn't available, chain replication can't commit writes until the
+> control plance detects the problem and takes the failing process out of the
+> chain. In Raft instead, a single process failing doesn't stop writes from
+> being committed since only a quorum of processes is needed to make progress.
+>
+> That said, chain replication allows write requests to be pipelined, which can
+> significantly improve throughput. Moreover, read throughput can be further
+> increased by distributing reads across replicas while still guaranteeing
+> linearizability. [...]
+>
+> You might be wondering at this point whether it's possible to replicate data
+> without needing consensus at all to improve performance further. In the next
+> chapter, we will try to do just that.
+
+So in short, from the author's comparison Raft has better write throughput and
+might have lower read throughput than chain replication.
+
+## Chapter 11 Coordination avoidance
 
