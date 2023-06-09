@@ -9,29 +9,11 @@ tags:
 categories:
 ---
 
-## TL;DR (3/2/2023)
+## TL;DR
 
 I am a Fullstack Software Engineer, who has mostly worked in the backend
 spectrum, and is comfortable with most layers of modern web development
-(frontend, backend, and platform/DevOps). I am having a strong preference in
-jobs that:
-
-1. Are fully remote or hybrid
-2. Are blockchain-related: I worked with blockchain and found the technology
-   fascinating and have a bright future ahead
-3. Leverage esoteric functional programming languages: Clojure is a favorite
-   niche language of mine, but I am open to other functional programming
-   languages like Haskell or Elixir or Scala or F# as well
-4. Allow me to go into a lower layer of programming: I did some bit diddling
-   in a side project, and really like the idea of working on core libraries and
-   applying algorithms to solve challenging technical problems
-5. Allow me to take the first step at leading or managing a small team:
-   management skills and leadership skills are things that I want to develop as
-   well
-
-Please be noted that: it is not a dealbreaker if the job does not meet all
-of them. Please do contact me if you think there is a good enough fit for both
-sides.
+(frontend, backend, and platform/DevOps). 
 
 I am going to list software projects (professional or personal) that I have
 worked on and what I contributed. The purpose is mainly to make it easier for my
@@ -53,7 +35,7 @@ To become a "Web3 Play-N-Earn game" on BNB Chain. The differences are:
 - Turning in-game items to NFTs and building an NFT marketplace to replace
   traditional game marketplaces
 
-### Smart Contract Events Data Synchronization for NFT Marketplace
+### NFT Marketplace Events Indexing
 
 #### Problem
 
@@ -78,8 +60,8 @@ the overall system.
 | End User | | Blockchain |
 +----+-----+ +------+-----+
      |              |
-     | interact     |
-     +------------->|
+     |   interact   |
+     |<------------>|
      |              |
      |              |
      |              |
@@ -96,8 +78,8 @@ the overall system.
 +----+-----+ +-----+-----+ +--+--+ +-----+----+ |    Services     | +------+-----+
      |             |          |          |      +--------+--------+        |
      |             |          |          |               |                 |
-     | interact    |          |          |               | query data      |
-     +------------>|          |          |               |<--------------->|
+     |  interact   |          |          |               | query data      |
+     |<----------->|          |          |               |<--------------->|
      |             | request  |          | upsert data   |                 |
      |             | data     |          |<------------->|                 |
      |             |<-------->|          |               |                 |
@@ -139,6 +121,7 @@ the overall system.
      | upsert     |            |              |             |             |
      | data       |            |              |             |             |
      |<-----------+            |              |             |             |
+     |            |            |              |             |             |
      |            |            |              |             |             |
 ```
 
@@ -201,6 +184,8 @@ Before having NFT Aggregator:
    |<------------|-----------------|---------------->|
    | buy NFT     |                 |                 |
    |<------------|-----------------|---------------->|
+   |             |                 |                 |
+   |             |                 |                 |
 ```
 
 After having NFT Aggregator:
@@ -226,27 +211,59 @@ After having NFT Aggregator:
    |              |                 |                 |
 ```
 
-### ERC-721 and ERC-1155 EVM Event Data Synchronization for Oxalus Analytics and Oxalus Wallet
+### ERC-20, ERC-721, and ERC-1155 Event Data Indexing
 
-Disclaimer: I am not the one who implemented the whole system, but I fixed a few
-complicated bugs of it.
+Disclaimer: I am not the one who implemented the whole service, but I fixed a
+few complicated bugs of it.
 
 #### Problem
 
-WIP
+Let us suppose we have a ERC-20 contract's address, we can easily know what is
+the current balance of an account (invoking `balanceOf`). To know the change
+history is another story, however. It involves manually indexing `Transfer`
+events. For ERC-721, apart from an NFT's transfer history, we also want to know
+every NFT that a wallet owns. It also involves indexing `Transfer` events.
+
+Indexing one or two contracts is not hard, but for more than a hundred, or even
+a thousand contracts, it simply becomes infeasible if we creates many
+connections to blockchain nodes and query the data, as we may get rate-limited.
+
+More specificially, in Oxalus Wallet's case, the product's backend have an
+unknown number of wallet that it needs to track. Oxalus Analytics can also have
+other insights from the transfer data.
 
 #### Solution
 
-WIP
+The team implemented a service that fetches every ERC-20, ERC-721, and
+ERC-1155's `Transfer` events, and try to put the data into a blob storage.
 
 #### Implementation
 
-WIP
+The service's algorithm is:
+
+- Read the last completed block from blob storage
+- Pick a big block range
+- Split the block range into smaller chunks
+- Fetch the events concurrently with each chunk
+- Join the data from the previous step
 
 #### Challenges
 
-It is well-known that data of blockchain is immutable, or is unchanged once
-"written down" 
+- "Unreliable" Data
+
+In the first time the service run, for the same block range (1 to 10 for
+example), there are 100 records in the storage, while in the second time, there
+are 101. In the third time, there are 99 records. My point is that: since a
+blockchain's data is immutable, we expect the number to be stable, or the same
+every time, but we get different numbers each time.
+
+Diving deep into the problem, I found that the issue lie at the way data's
+returned by the blockchain's node. To be more specific, the nodes from NodeReal
+limit their data to 50,000 records, which caused the unreliability.
+
+### Marketplace Contract Events Indexing
+
+TODO
 
 ## Minh Phu Analytics
 
