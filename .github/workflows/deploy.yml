@@ -20,6 +20,11 @@ jobs:
         hugo-version: '0.111.3'
         extended: true
 
+    - name: Update config.toml
+      working-directory: ./site
+      run: |
+        sed -i 's/nguyenhuythanh.com/thanhnguyen2187.github.io\/islet/g' config.toml
+
     - name: Build
       working-directory: ./site
       run: |
