@@ -98,48 +98,54 @@
   \resumeSubHeadingListStart
 
     \resumeSubheading
-      {Wombat Exchange}{Software Engineer}
+      {Wombat Exchange}{Software Engineer, Analytics Engineer}
       {Remote, Hongkong SAR}{7/2023 -- Now}
       \resumeItemListStart
         \resumeItem{EVM Data Indexing}
           {Maintained and deployed subgraphs for 3+ EVM chains, which handled
-          more than 300,000 events. The subgraphs served Wombat Analytics
-          page, which has nearly 250,000 monthly requests. Optimized Wombat
-          Analytics page's loading time from 10+ seconds to 1 second.
+          1M+ events. The subgraphs served Wombat Analytics page, which has
+          nearly 250K monthly requests. Optimized Wombat Analytics page's
+          loading time from 10+ seconds to 1 second.
 
-          Technologies used: Subgraph, AssemblyScript, TypeScript, NextJS,
-          Vercel.}
+          Technologies used: TypeScript, AssemblyScript, NextJS, Subgraph.}
+        \resumeItem{EVM Data Analytics}
+          {Implemented 30+ Dune queries and graphs and dashboards, which reduced
+          marketing team's manual data calculation time by 90\%.
+
+          Technologies used: DuneSQL, Dune.}
       \resumeItemListEnd
 
     \resumeSubheading
-      {Xantus}{Software Engineer}
+      {Xantus}{Software Engineer, Data Engineer}
       {Le Van Luong, Thanh Xuan, Hanoi}{10/2021 -- 12/2022}
       \resumeItemListStart
         \resumeItem{EVM Data Indexing}
-          {Designed, implemented, deployed, and optimized Events Synchronization
-          services for 10+ EVM-compatible Smart Contracts on 3+ chains. The
-          services provide on-chain data for 3+ projects (Mones, Gunfire Avax,
-          and Oxalus NFT Aggregator).
+          {Designed, implemented, deployed Events Synchronization services for
+          10+ EVM-compatible Smart Contracts on 3+ chains. The services handled
+          100k+ events, provided on-chain data for 3+ projects (Mones, Gunfire
+          Avax, and Oxalus NFT Aggregator). Optimized Block Time Querying
+          Service's loading time from 15+ seconds to less than 3 seconds.
 
-          Technologies used: Apache Kafka, TypeScript, web3js, Golang,
-          go-ethereum.}
+          Technologies used: Golang, TypeScript, go-ethereum, web3js, Apache
+          Kafka.}
       \resumeItemListEnd
 
     \resumeSubheading
-      {Teko Vietnam}{Software Engineer, Data Platform Engineer}
+      % {Teko Vietnam}{Software Engineer, Data Platform Engineer}
+      {Teko Vietnam}{Software Engineer}
       {Hoang Cau, Dong Da, Hanoi}{4/2021 -- 1/2022}
       \resumeItemListStart
         \resumeItem{Master Product Data}
           {Designed, implemented, and deployed data pipelines, data models, and
-          REST API of Product Matching service for 10k+ products.
+          REST API of Product Matching Service which handled 10k+ products.
 
           Technologies used: Python, Golang, FastAPI, underthesea.}
-        \resumeItem{Real-time Analytics Storage Layer}
-          {Tested, deployed, and operated Apache Druid as the storage layer for
-          real-time analytics for 1m+ events.
+        % \resumeItem{Real-time Analytics Storage Layer}
+        %   {Tested, deployed, and operated Apache Druid as the real-time
+        %   analytics storage layer for 80m+ events.
 
-          Technologies used: Google Cloud, Kubernetes, Docker, Apache Druid,
-          Apache Kafka, GitLab CI.}
+        %   Technologies used: Google Cloud, Kubernetes, Docker, Apache Druid,
+        %   Apache Kafka, GitLab CI.}
       \resumeItemListEnd
 
     % \resumeSubheading
@@ -154,17 +160,18 @@
     %   \resumeItemListEnd
 
     \resumeSubheading
+      % {AI Academy Vietnam}{Software Engineer, System Engineer}
       {AI Academy Vietnam}{Software Engineer, System Engineer}
       {Hoang Quoc Viet, Nghia Tan, Hanoi}{6/2019 -- 8/2020}
       \resumeItemListStart
         \resumeItem{Scheduled News Aggregation}
-          {Designed, implemented, and deployed Data Aggregating (crawling) for
-          50+ news sources.
+          {Designed, implemented, and deployed Data Aggregating (crawling)
+          Service for 50+ news sources.
 
           Technologies used: Python, RabbitMQ, APScheduler, pika.}
         \resumeItem{Time Series Prediction}
-          {Designed, implemented, and deployed configurable Prediction service
-          that can use 10+ prediction models.
+          {Designed, implemented, and deployed configurable Prediction Service
+          that can leverage 20+ prediction models.
 
           Technologies used: Python, sklearn, statsmodels.}
       \resumeItemListEnd
@@ -196,15 +203,18 @@
 \section{Side Projects}
   \resumeSubHeadingListStart
     \resumeSubItem{Crypta}
-      {An offline-first code snippet manager. Deployed at: 
+      {Offline-first code snippet manager using SvelteJS. Deployed at: 
       \href{https://thanhnguyen2187.github.io/crypta}{https://thanhnguyen2187.github.io/crypta}.}
-    \resumeSubItem{Darkest Savior}
-      {A low-level Golang library and CLI tool to convert Darkest Dungeon's
-      proprietary save format to JSON and vice versa. Source at:
-      \href{https://github.com/thanhnguyen2187/darkest-savior}{https://github.com/thanhnguyen2187/darkest-savior}.}
+    % \resumeSubItem{Darkest Savior}
+    %   {A low-level Golang library and CLI tool to convert Darkest Dungeon's
+    %   proprietary save format to JSON and vice versa. Source at:
+    %   \href{https://github.com/thanhnguyen2187/darkest-savior}{https://github.com/thanhnguyen2187/darkest-savior}.}
     \resumeSubItem{CamLisp}
-      {A simple Lisp/Scheme interpreter in OCaml. Source at:
+      {Simple Lisp/Scheme interpreter in OCaml. Source at:
       \href{https://github.com/thanhnguyen2187/camlisp}{https://github.com/thanhnguyen2187/camlisp}.}
+    \resumeSubItem{Phoenix}
+      {Declarative machine configuration in NixOS. Source at:
+      \href{https://github.com/thanhnguyen2187/.phoenix}{https://github.com/thanhnguyen2187/.phoenix}.}
   \resumeSubHeadingListEnd
 
 %--------SKILLS AND INTERESTS-----------
