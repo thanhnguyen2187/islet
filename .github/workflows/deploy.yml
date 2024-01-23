@@ -22,7 +22,10 @@ jobs:
 
     - name: Build
       working-directory: ./site
-      run: hugo --minify
+      run: |
+        hugo \
+          --minify \
+          --baseURL https://thanhnguyen2187.github.io/islet/
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
