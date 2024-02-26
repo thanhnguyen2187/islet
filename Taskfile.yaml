@@ -48,7 +48,7 @@ tasks:
   build-resume:
     dir: ./site/static
     cmds:
-      - pdflatex resume.tex
+      - typst compile resume.typ
 
   open-resume: xdg-open ./site/static/resume.pdf
 
