@@ -46,10 +46,10 @@
   location: "Hanoi, Vietnam",
   date: "4/2021 -- 12/2021",
   [*Master Product Data*: Designed, implemented, and deployed data pipelines, data
-  models, and REST API of Product Matching Service which processed 10k+
+  models, and REST API of Product Matching Service which processed 10K+
   products.
 
-  Technologies used: Python, Golang, FastAPI, SQLModel, underthesea.],
+  Technologies used: Python, Golang, FastAPI, SQLModel.],
   // [*Real-time Analytics Storage Layer*: Tested, deployed, and operated Apache
   // Druid as the real-time analytics storage layer for 80M+ events.
 
@@ -57,7 +57,8 @@
   // Apache Kafka, GitLab CI.]
 )
 #exp_item(
-  role: "Software Engineer, System Engineer",
+  // role: "Software Engineer, System Engineer",
+  role: "Software Engineer, Research Engineer",
   name: "AI Academy Vietnam",
   location: "Hanoi, Vietnam",
   date: "6/2019 -- 8/2020",
@@ -65,10 +66,15 @@
   for 50+ news sources.
 
   Technologies used: Python, Flask, SQLAlchemy, pika, RabbitMQ, APScheduler.],
-  [*Time Series Prediction*: Designed, implemented, and deployed configurable
-  Prediction Service that can leverage 20+ prediction models.
+  // [*Time Series Prediction*: Designed, implemented, and deployed configurable
+  // Prediction Service that can leverage 20+ prediction models.
 
-  Technologies used: Python, sklearn, statsmodels.],
+  // Technologies used: Python, sklearn, statsmodels.],
+  [*Sentiment Analysis*: Researched and implemented a custom rule-based
+  Sentiment Analysis Algorithm that utilizes 3K+ keywords to segment 5K+ text
+  documents.
+
+  Technologies used: Python, underthesea.],
 )
 
 #resume_heading[Education & Certification]
