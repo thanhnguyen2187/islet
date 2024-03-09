@@ -36,7 +36,7 @@ enableGitInfo = true
 
   [params.logo]
     logoText     = "islet"
-    logoHomeLink = "./"
+    logoHomeLink = "/"
 
   [[params.social]]
     name = "github"
