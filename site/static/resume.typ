@@ -12,6 +12,7 @@
 #resume_heading[Experience]
 #exp_item(
   role: "Software Engineer, Analytics Engineer",
+  // role: "Software Engineer",
   name: "Wombat Exchange",
   location: "Remote, Hongkong SAR",
   date: "7/2023 -- Present",
@@ -27,17 +28,21 @@
   Technologies used: DuneSQL, Dune.],
 )
 #exp_item(
-  role: "Software Engineer, Data Engineer",
+  role: "Software Engineer, Platform Engineer",
   name: "Xantus Network",
   location: "Hanoi, Vietnam",
   date: "10/2021 -- 12/2022",
-  [*EVM Data Indexing*: Designed, implemented, deployed Events Synchronization
-  services for 10+ EVM-compatible Smart Contracts on 3+ chains. The services
-  handled 100k+ events, provided on-chain data for 3+ projects (Mones, Gunfire
-  Avax, and Oxalus NFT Aggregator). Optimized Block Time Querying Service's
-  loading time from 15+ seconds to less than 3 seconds.
+  [*EVM Data Indexing*: Designed, implemented, and deployed Events
+  Synchronization services for 10+ EVM-compatible Smart Contracts on 3+ chains.
+  The services handled 100k+ events, provided on-chain data for 3+ projects
+  (Mones, Gunfire Avax, and Oxalus NFT Aggregator). Optimized Block Time
+  Querying Service's loading time from 15+ seconds to less than 3 seconds.
 
   Technologies used: Golang, TypeScript, go-ethereum, web3js, Apache Kafka.],
+  // [*GitOps Pipeline*: Implemented and deployed a custom CI/CD workflow for 20+
+  // projects which reduced 90% manual deployment time.
+
+  // Technologies used: Google Cloud, Kubernetes, Docker, GitLab CI.]
 )
 #exp_item(
   role: "Software Engineer",
@@ -57,6 +62,7 @@
   // Apache Kafka, GitLab CI.]
 )
 #exp_item(
+  // role: "Software Engineer",
   // role: "Software Engineer, System Engineer",
   role: "Software Engineer, Research Engineer",
   name: "AI Academy Vietnam",
