@@ -11,7 +11,7 @@
 
 #resume_heading[Experience]
 #exp_item(
-  role: "Software Engineer, Analytics Engineer",
+  role: "Fullstack Software Engineer",
   // role: "Software Engineer",
   name: "Wombat Exchange",
   location: "Remote, Hongkong SAR",
@@ -22,7 +22,7 @@
   time from 10+ seconds to 1 second.
 
   Technologies used: TypeScript, AssemblyScript, NextJS, Subgraph.],
-  [*EVM Data Analytics*: Implemented 30+ Dune queries and graphs and dashboards,
+  [*EVM Data Analytics*: Implemented 100+ Dune queries and graphs and dashboards,
   which reduced Marketing Team's manual data calculation time by 90%.
 
   Technologies used: DuneSQL, Dune.],
