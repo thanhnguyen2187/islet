@@ -63,8 +63,8 @@
 )
 #exp_item(
   // role: "Software Engineer",
-  // role: "Software Engineer, System Engineer",
-  role: "Software Engineer, Research Engineer",
+  role: "Software Engineer, System Engineer",
+  // role: "Software Engineer, Research Engineer",
   name: "AI Academy Vietnam",
   location: "Hanoi, Vietnam",
   date: "6/2019 -- 8/2020",
@@ -72,15 +72,15 @@
   for 50+ news sources.
 
   Technologies used: Python, Flask, SQLAlchemy, pika, RabbitMQ, APScheduler.],
-  // [*Time Series Prediction*: Designed, implemented, and deployed configurable
-  // Prediction Service that can leverage 20+ prediction models.
+  [*Time Series Prediction*: Designed, implemented, and deployed configurable
+  Prediction Service that can leverage 20+ prediction models.
 
-  // Technologies used: Python, sklearn, statsmodels.],
-  [*Sentiment Analysis*: Researched and implemented a custom rule-based
-  Sentiment Analysis Algorithm that utilizes 3K+ keywords to segment 5K+ text
-  documents.
+  Technologies used: Python, pandas, sklearn, statsmodels.],
+  // [*Sentiment Analysis*: Researched and implemented a custom rule-based
+  // Sentiment Analysis Algorithm that utilizes 3K+ keywords to segment 5K+ text
+  // documents.
 
-  Technologies used: Python, underthesea.],
+  // Technologies used: Python, underthesea.],
 )
 
 #resume_heading[Education & Certification]
@@ -104,7 +104,7 @@
 
 #resume_heading("Side Projects")
 #side_project_item(
-  name: "Crypta",
+  name: "Cryptaa",
   content: [
     Offline-first code snippet manager powered by SvelteJS. Deployed at:
     #link(
