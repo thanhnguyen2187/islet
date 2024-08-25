@@ -27,8 +27,9 @@ touch of boredom eventually led me to explore the world of LLMs.
 My first practical application of LLMs came when I faced the task of creating
 numerous Golang API endpoints with similar structures but minor differences.
 These attributes made deduplication challenging. To my surprise, I found LLMs
-incredibly useful for generating simple, pattern-based code. They saved time and
-reduced errors in these tedious tasks.
+incredibly useful for generating that kind of predictable with little twists
+code. LLMs' code generation ability saved time and reduced errors in these
+tedious tasks.
 
 Experimenting with LLM-aided reading was a revelation. The experience surpassed
 traditional reading in many ways:
@@ -81,8 +82,8 @@ the process feel convoluted [^claude-blog-draft].
   tokens](https://support.anthropic.com/en/articles/7996856-what-is-the-maximum-prompt-length)
   comparing to [128,000
   tokens](https://platform.openai.com/docs/models/gpt-4o)), and its more precise
-  recall abilities. Claude was able to pinpoint an almost exact location in a
-  regulation document I provided, while ChatGPT couldn't. For documents
+  recall abilities (Claude was able to pinpoint an almost exact location in a
+  regulation document I provided, while ChatGPT couldn't). For documents
   exceeding Claude's context length, splitting them into manageable parts (e.g.,
   dividing a large book into chapters) and requesting summarizations works well.
 - [ChatGPT](https://chatgpt.com): The tool excels at simpler tasks like
