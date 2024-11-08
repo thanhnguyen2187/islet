@@ -17,6 +17,16 @@ A more correct title would be "`task` vs `just`", but it will look confusing for
 the search engines. I did not find a comparison post on anywhere, so here we
 are. In this post, I will tell my experiences and evaluations on them.
 
+**2024 Important Note**: this post is quite outdated. As the two tools are
+actively maintained and developed over the years, I think choosing one over
+another doesn't matter as their functionalities would be pretty much equivalent.
+(@castedo)[https://gitlab.com/castedo] pointed out that we can (invoke Justfile
+in another directories like Taskfiles as
+well)[http://just.systems/man/en/invoking-justfiles-in-other-directories.html].
+One big consideration on the top of my head are the toolchains on your machine:
+if you have `go` available, `go` with `task`. The same goes for the other tool:
+`just` `cargo install ...` is also simple.
+
 ## TL; DR
 
 - Scripting arguments: `just`
