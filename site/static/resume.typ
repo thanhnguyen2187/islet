@@ -93,12 +93,11 @@
   [*Specialized Individuals Informatics Olympiad 2017*: Second Prize],
   [*Super Cup Informatics Olympiad 2018*: Third Prize],
 )
-#resume_heading[Education & Certification]
 #edu_item(
   name: "WorldQuant University",
   degree: "Master, Finance Engineering",
   location: "Remote, USA",
-  date: "7/2024",
+  date: "7/2024 -- Present",
 )
 // #edu_item(
 //   name: "IELTS Issued by British Council",
