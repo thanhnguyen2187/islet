@@ -1,10 +1,22 @@
 baseURL      = "https://nguyenhuythanh.com/"
-languageCode = "en-us"
-title        = "Thanh's Islet"
-theme        = "hello-friend-ng"
+theme        = "hugo-bearblog"
 paginate     = 10
 rssLimit     = 10
 enableGitInfo = true
+
+# Basic metadata configuration for your blog.
+title = "Thanh's Islet 🏝️"
+copyright = "Copyright © 2024, Thanh Nguyen."
+languageCode = "en-US"
+
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+# disableKinds = ["taxonomy"]
+# ignoreErrors = ["error-disable-taxonomy"]
+# [permalinks]
+#   blog = "/:slug/"
+#   tags = "/blog/:slug"
 
 # PygmentsCodeFences = true
 # PygmentsStyle = "monokai"
@@ -56,11 +68,11 @@ enableGitInfo = true
   series   = "series"
 
 [menu]
-  [[menu.main]]
-    identifier = "about"
-    name       = "About"
-    url        = "./about/"
+  # [[menu.main]]
+  #   identifier = "about"
+  #   name       = "About"
+  #   url        = "/about/"
   [[menu.main]]
     identifier = "posts"
     name       = "Posts"
-    url        = "./posts/"
+    url        = "/posts/"
