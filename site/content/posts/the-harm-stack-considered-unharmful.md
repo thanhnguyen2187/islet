@@ -36,7 +36,7 @@ As we consider HTMX as the core and the main topic, you might wonder why is the
 title about HARM stack? The HARM acronym is memorable, I must admit. Also, I can
 attract more reader that way (people who are either interested in HTMX, or Axum,
 or AlpineJS, or Rust, or Maud). The ARM (Axum/AlpineJS, Rust, Maud) parts are
-expandable (can be replaced easily), and I will explore that in another section
+expendable (can be replaced easily), and I will explore that in another section
 of this post.
 
 ## Problems of CSR
