@@ -93,20 +93,20 @@
   [*Specialized Individuals Informatics Olympiad 2017*: Second Prize],
   [*Super Cup Informatics Olympiad 2018*: Third Prize],
 )
-// #edu_item(
-//   name: "WorldQuant University",
-//   degree: "Master, Finance Engineering",
-//   location: "Remote, USA",
-//   date: "7/2024 -- Present",
-// )
 #edu_item(
-  name: "IELTS Issued by British Council",
-  degree: "Academic Module",
-  location: "Tay Ho, Hanoi",
-  date: "2/2023",
-  [*Overall*: 7.5],
-  [*TRF Number*: 22VN027313NGUH002A],
+  name: "WorldQuant University",
+  degree: "Master, Finance Engineering",
+  location: "Remote, USA",
+  date: "7/2024 -- Present",
 )
+// #edu_item(
+//   name: "IELTS Issued by British Council",
+//   degree: "Academic Module",
+//   location: "Tay Ho, Hanoi",
+//   date: "2/2023",
+//   [*Overall*: 7.5],
+//   [*TRF Number*: 22VN027313NGUH002A],
+// )
 
 #resume_heading("Side Projects")
 #side_project_item(
