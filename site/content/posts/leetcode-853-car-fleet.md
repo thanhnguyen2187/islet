@@ -15,7 +15,10 @@ categories:
 
 I find the problem strikes a balance between tricky (needing specific knowledge
 of data structure and algorithm) and interesting (solvable with first-principle
-thinking). Let's get into it.
+thinking). However, after understanding the tricky part and got the thinking
+done, and implemented working code, I still could not really explain in a short
+and concise way about what is the intuition behind. Hence the writing. Let's
+hope that it helps you as much as it helped me.
 
 ## Problem Description
 
@@ -59,8 +62,9 @@ Then the second car would merge with the first car.
 ![](../images/leetcode-853-car-fleet-intuition.png)
 
 The key insights to solve the problem are: if a further car arrives faster than
-a closer one, we merge the two. In the end, we should have a list of arrive
-times that corresponds to the number of car fleets.
+a closer one, we merge the two by just recording the slower car (one that has
+higher arrival time). In the end, we should have a list of arrive times that
+corresponds to the number of car fleets.
 
 ## Implementation
 
@@ -114,12 +118,11 @@ class Solution:
 
 ## Conclusion
 
-This problem is a great example of how seemingly complex scenarios can be solved
-by finding the right perspective. By focusing on arrival times rather than just
-positions and speeds, we transform a dynamic problem into a simpler static one.
-
-The monotonic [^monotonic] sequence pattern used here appears in various LeetCode problems
-and is worth adding to your algorithmic toolbox.
+I hope that my explanation is clear enough, and you are able to derive your own
+implementation after reading the algorithm steps. The monotonic [^monotonic]
+sequence pattern used here (a monotonic stack, to be precise) appears in
+various LeetCode problems and is worth adding to your algorithm solving
+skillset.
 
 [^monotonic]: the mathematics term "monotonic" means
 
