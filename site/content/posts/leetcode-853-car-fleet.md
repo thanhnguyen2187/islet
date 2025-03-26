@@ -15,10 +15,10 @@ categories:
 
 I find the problem strikes a balance between tricky (needing specific knowledge
 of data structure and algorithm) and interesting (solvable with first-principle
-thinking). However, after understanding the tricky part and got the thinking
-done, and implemented working code, I still could not really explain in a short
-and concise way about what is the intuition behind. Hence the writing. Let's
-hope that it helps you as much as it helped me.
+thinking). However, after understanding the tricky part, and working through the
+thinking, and implementing working code, I still could not really explain the
+intuition concisely. Hence this writing. Let's hope that it helps you as much as
+it helped me.
 
 ## Problem Description
 
