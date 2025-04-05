@@ -50,7 +50,7 @@ Two cars will merge to form a fleet if they meet before reaching the finish
 line. This happens when:
 
 - One is slower, but starts closer to the finish line
-- The other is faster, but starts further to the end
+- The other is faster, but starts farther to the end
 
 For example:
 
@@ -61,7 +61,7 @@ Then the second car would merge with the first car.
 
 ![](../images/leetcode-853-car-fleet-intuition.png)
 
-The key insights to solve the problem are: if a further car arrives faster than
+The key insights to solve the problem are: if a farther car arrives faster than
 a closer one, we merge the two by just recording the slower car (one that has
 higher arrival time). In the end, we should have a list of arrive times that
 corresponds to the number of car fleets.
