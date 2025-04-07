@@ -355,6 +355,9 @@ of complexity before solving a problem helps.
     have to resolve no matter what tool we use.
 [^officeparser]: https://www.npmjs.com/package/officeparser
 [^docx4js]: https://www.npmjs.com/package/docx4js
+[^ts-match]: While I'm aware that a library for pattern matching exists,
+    https://www.npmjs.com/package/ts-match, I'm not inclined on its usage for
+    additional dependency and performance reasons.
 [^docx-nodejs]: https://www.npmjs.com/package/docx
 [^fast-xml-parser]: https://www.npmjs.com/package/fast-xml-parser
 [^xpath-js]: https://www.npmjs.com/package/xpath
