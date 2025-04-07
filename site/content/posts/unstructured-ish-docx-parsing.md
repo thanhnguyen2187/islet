@@ -1,7 +1,7 @@
 ---
 title: "Unstructured-ish DOCX Parsing in TypeScript/NodeJS"
 date: 2025-04-05T19:18:46+07:00
-draft: true
+draft: false
 toc: true
 tags:
 - docx-parsing
@@ -16,18 +16,21 @@ categories:
 I recently took in a freelancing project, and one particularly interesting task
 is to convert unstructured-ish DOCX files to structured data, let's say JSON.
 Intially, I estimated that it should only take me around 2 days for the
-implementation. I know what's are you thinking. You are right that
+implementation. I know what are you thinking. You are right that:
 
 > [...] overconfidence is a slow and insidious killer. [^darkest-dungeon]
 
-In the end, it took me more than 5 days for the task.
+In the end, the task took me more than 5 days to complete. Reflecting on it,
+apart from being reminded that I shouldn't underestimate technical challenges I
+haven't seen before, I also think my approach is a good language-agnostic way to
+deal with DOCX file and convert unstructured-ish data to structured data.
 
 I used the word "unstructured-ish" in the sense that it's generated from another
 server with clear structure: in each file there are multiple articles; each
 article lays out title, then author, then other information, then a summary at
-the end). However, the format of the articles in those files can be different
-(some misses author or even have multiple authors; some has commentary instead
-of summary; etc.). While there is essential complexity
+the end. However, the format of the articles in those files can be different:
+some misses author or even have multiple authors; some has commentary instead of
+summary; etc. While there is essential complexity
 [^accidental-and-essential-complexity] for that part of the work, I think the
 accidental complexity [^accidental-and-essential-complexity] is interesting as
 well. Let's explore both in this post.
@@ -45,7 +48,7 @@ Until you try to hunt down the "perfect" library to parse DOCX files.
   appear on your search, but it seems to be more focused on DOCX file
   creation.
 
-After browsing for a while and gained a rudimentary understanding that a DOCX
+After browsing for a while and gaining a rudimentary understanding that a DOCX
 file is just a bunch of XML files compressed in the ZIP format, I reluctantly
 decided to roll my own solution. It seems to be easy enough: the main file that
 I'll have to look at is `document.xml`.
@@ -96,7 +99,7 @@ const output = parser.parse(xmlDataStr);
 }
 ```
 
-Imagine how would it look with using the "real-life" XML from DOCX files:
+Imagine how would it look using the "real-life" XML from DOCX files:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -146,13 +149,16 @@ Imagine how would it look with using the "real-life" XML from DOCX files:
 ```
 
 I envisioned myself going through the path of converting XML to JSON, and
-thought that I would need a query language. And then I realized I can just query
-the XML myself using `xpath` [^xpath-js].
+thought that I would need a query language as the data would be complex. Then I
+realized the complexity of the data is there, no matter what I do. A more
+straightforward way is to work with the XML, and the query language to use is
+`xpath` [^xpath-js].
 
-## A rudimentary parser
+## Turning unstructured data into structured data
 
-Taking a closer look at a DOCX file, I found out that I can split the file into
-nodes groups corresponding to the articles.
+We get closer to the finish line having the XML file and XPath to check the
+structure/content. Explore the XML content in more details, I found out that I
+can split the file into nodes groups corresponding to the articles.
 
 ```ts
 const _xpath = xpath.useNamespaces({
@@ -180,22 +186,45 @@ export function splitNodes(nodes: Node[]): Node[][] {
 ```
 
 We now come to the core challenge: to turn the nodes within the articles into
-structured data. As I've mentioned in the beginning, the articles has different
-format: one has author, while another doesn't, and another has multiple authors.
-They have different ending as well: one is summarized, and another is commented
-on. Long gone are my Lisp'ing days with SICP, but the knowledge about "parser"
-part within an interpreter/compiler stayed. This is inherently a parsing
-problem: we have nodes (as tokens), and the parser would read them one by one,
-then checks and changes its state to accomodate.
+structured data. As I've mentioned in the beginning, the articles have different
+formats: one has author, while another doesn't, and another has multiple
+authors. They have different ending as well: one is summarized, and another is
+commented on. Long gone are my Lisp'ing days with SICP, but the knowledge about
+"parser" part within an interpreter/compiler stayed. This is inherently a
+parsing problem: we have nodes (as tokens), and the parser would read them one
+by one, then checks and changes its state to accomodate.
 
 ![](../images/docx-state-machine.png)
 
 I find that instead of implementing the code imperatively, using a parser with
 explicit state makes logging/error handling/logic modification much more
-bearable. There is only one final annoyance of NodeJS/Javascript land: we have
-no pattern matching [^ts-match]. To keep repeating `if (complexLogic1() &&
-complexLogic2() || ...)` is annoying. I managed to aleviate it by using
-`switch(true)`:
+bearable. There is only one final annoyance of NodeJS/Javascript land: we don't
+have built-in pattern matching [^ts-match]. I suppose we can do it like this:
+
+```ts
+if (stateCurrent === "Initial" && isTitle(node)) {
+    ...
+} else if (...) {
+    ...
+} else {
+    ...
+}
+```
+
+For aesthetic reasons, I prefer `switch(true)`:
+
+```ts
+switch (true):
+    case ...:
+    {
+        ...
+    }
+    break;
+    default:
+        ...
+```
+
+Which leads to this implementation:
 
 ```ts
 export function advanceState({
@@ -244,8 +273,9 @@ export function advanceState({
 }
 ```
 
-In the end I have a higher-order function like this to ensure that the created
-`parse` has state:
+In the end I implemented `createNodesParseFn` as a higher-order function to
+ensure that the created `parse` has state. `parseRawText` and `parseDocx` are
+wrappers for the actual functionality.
 
 ```ts
 export function createNodesParseFn() {
@@ -269,6 +299,12 @@ export function createNodesParseFn() {
   };
 }
 
+export function parseRawText(rawText: string): Node[] {
+  const doc = new DOMParser().parseFromString(rawText, "text/xml");
+  // @ts-ignore
+  return _xpath("/w:document/w:body/*", doc) as Node[];
+}
+
 export function parseDocx(docx: Buffer) {
   const zip = new AdmZip(docx);
   const text = zip.readAsText("word/document.xml");
@@ -290,22 +326,35 @@ DOCX parsing:
 - Read `document.xml`
 - Use XPath to extract data/structure of the XML file(s)
 
+And the implementation of a stateful parser to turn unstructured-ish data to
+structured data.
+
 Back to the journey that I traveled to finish the task (which is more convoluted
 in reality, like the actual code implementation handle much more cases), it made
-me think about accidental and essential complexity. I really wondered if there
-is a way to... avoid the accidental part, then came to the verdict that it seems
-hard, if not impossible. It's "accidental" because we cannot foresee it. On our
-side, or at least my side, we can only prevent ourselves from underestimating
-"seemingly new" problems we face.
+me really reflect on the nature of accidental and essential complexity.
+Something is essential because it is unavoidable, but can we... avoid the
+accidental part?
+
+I then came to the verdict that it seems hard, if not impossible. Experience
+helps, but no one has experience in everything. It's "accidental" because we
+cannot foresee it. On our side, or at least my side, we should prevent ourselves
+from underestimating "seemingly new" problems we face. Thinking about both types
+of complexity before solving a problem helps.
 
 [^darkest-dungeon]: It's a quote from [Darkest
     Dungeon](https://www.darkestdungeon.com/), one of my most favorite games.
     It's a shame that the narrator, whose voice was still in my head, [passed
     away
     recently](https://www.pcgamer.com/games/wayne-june-famed-narrator-of-the-darkest-dungeon-games-has-died/).
+[^accidental-and-essential-complexity]: The terms are coined by Fred Brooks in
+    his essay [No Silver
+    Bullet](https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf).
+    "Accidental complexity" is about the challenges from the
+    tooling/environment/past decision of the engineer, while "essential
+    complexity" is about the inherent challenges of problem solving, in which we
+    have to resolve no matter what tool we use.
 [^officeparser]: https://www.npmjs.com/package/officeparser
 [^docx4js]: https://www.npmjs.com/package/docx4js
 [^docx-nodejs]: https://www.npmjs.com/package/docx
 [^fast-xml-parser]: https://www.npmjs.com/package/fast-xml-parser
-[^accidental-and-essential-complexity]: https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf
 [^xpath-js]: https://www.npmjs.com/package/xpath
