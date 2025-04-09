@@ -10,15 +10,16 @@ tags:
 categories:
 ---
 
-In this post, I'll cover what happened and the technical details of a job scam
-that I've avoided. It's my second time encoutering this kind of scam. In the
-first time, I just ignored it as the sign is too obvious: a non-fitting job
-(frontend heavy job for a backend guy) where the recruiter is "impressed with my
-technical skills" and think that I'm "an exellent fit". For this second time, I
-got fooled at first as it is too good, and after I realized it's too good to be
-true and likely a scam, instead of stopping early, I just got... more patient
-and curious about what's behind. I hope that this post can be both entertaining
-and informative for my readers as well.
+I'm going to cover what happened and the technical details of a crypto job scam
+that I've avoided. Let's hope that it can be both entertaining and informative.
+
+It's my second time encoutering this kind of scam. In the first time, I just
+ignored it as the sign is too obvious: a non-fitting job (frontend heavy job for
+a backend guy) where the recruiter is "impressed with my technical skills" and
+think that I'm "an exellent fit". For this second time, I got fooled at first as
+it is too good, and after I realized it's too good to be true and likely a scam,
+instead of stopping early, I just got... more patient and curious about what's
+behind. 
 
 ## The Conversation
 
@@ -42,8 +43,8 @@ showing any available role that is fully remote nor for Vietnamese candidates.
 
 ![](../images/crypto-job-scam-3.png)
 
-By now, I realized that it's highly a scam, but got curious about what's next, so I
-stayed.
+By now, I realized that it's highly a scam, but got curious about what's next,
+so I stayed.
 
 ![](../images/crypto-job-scam-4.png)
 
@@ -164,11 +165,11 @@ sent it to the scammer.
 
 ## Conclusion
 
-By now, it's obviously that "if it's too good to be true, then it's probably
-is (a scam)". But I can imagine why people fall for this: the excitement of
-having a lucrative job offer blinds us from being rational. Technical-wise, we
-should check the code we are going to run, including the dependencies.
-Non-technical-wise, we should check:
+By now, I hope you feel obvious that "if it's too good to be true, then it's
+probably is (a scam)". But I can imagine why people fall for this: the
+excitement of having a lucrative job offer blinds us from being rational.
+Technical-wise, we should check the code we are going to run, including the
+dependencies. Non-technical-wise, we should check:
 
 - Nationality required: it's a red flag if the company is not hiring worldwide
   nor people from your country, and there is still a job
