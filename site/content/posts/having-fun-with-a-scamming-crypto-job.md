@@ -179,10 +179,22 @@ dependencies. Non-technical-wise, we should check:
 Scamming is common in crypto world [^crypto-job-scams-article] and you can never
 be too careful.
 
+**Update**: following a suggestion on Tildes [^tildes-suggestion], I reported
+the scam to:
+
+- GitHub: asked them to look at the malware downloading repository
+  [^code-downloader].
+- Company R: told them that someone impersonated their recruiter.
+- Namescheap, the registrar of the domain `datatabletemplate.xyz`: told them
+  about what happened.
+- Telegram, the platform that the conversation happened: told them about what
+  happened.
+
 [^code-main]: https://github.com/thanhnguyen2187/unirouter-compromised
 [^code-downloader]: I [backed it
     up](https://github.com/thanhnguyen2187/uniroute-compromised) from the
     [original repository](https://github.com/TedCollin/uniroute/) (likely to be
     taken down after a while). 
 [^crypto-job-scams-article]: https://cointelegraph.com/learn/articles/crypto-job-scams
+[^tildes-suggestion]: https://tildes.net/~comp/1n9o/having_fun_with_a_scamming_crypto_job#comment-fbl8
 
