@@ -185,7 +185,7 @@ the scam to:
 - GitHub: asked them to look at the malware downloading repository
   [^code-downloader].
 - Company R: told them that someone impersonated their recruiter.
-- Namescheap, the registrar of the domain `datatabletemplate.xyz`: told them
+- Namecheap, the registrar of the domain `datatabletemplate.xyz`: told them
   about what happened.
 - Telegram, the platform that the conversation happened: told them about what
   happened.
