@@ -26,7 +26,7 @@ mouseless might aid in preventing common pains and injuries of software
 engineers (namely RSI and carpel tunnel) as well. In this post, I'll try to get
 into each tool I used and my thoughts about them.
 
-![meme](../images/mouseless-meme.png)
+![meme](../images/mouseless-meme.webp)
 
 ## Vimium
 
