@@ -131,7 +131,7 @@ cover one screen (I have no way to access the other screen).
 
 Here is an illustration to the problem:
 
-![drawing-tablet](../images/mouseless-drawing-tablet-problem.png)
+![drawing-tablet-problem](../images/mouseless-drawing-tablet-problem.webp)
 
 This is not a post about drawing tablets, so I won't dive too deep into which
 one should you choose in case you are intrigued, but we generally have 3 options
