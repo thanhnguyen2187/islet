@@ -1,7 +1,7 @@
 ---
 title: "Using Rust Backend To Serve An SPA"
 date: 2025-05-29T12:49:19+07:00
-draft: true
+draft: false
 toc: true
 tags:
 categories:
