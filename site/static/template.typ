@@ -65,12 +65,12 @@
     #grid(
       columns: (1fr, 1fr),
       align(left)[
-        *#name* \
-        _#location _
+        *#degree* \
+        _#name _
       ],
       align(right)[
-        #degree \
-        _#date _
+        #date \
+        _#location _
     ])
     #list(..points)
   ])

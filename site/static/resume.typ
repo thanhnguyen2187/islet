@@ -4,28 +4,43 @@
 
 #header(
   name: "Thanh Nguyen",
-  phone: "(+84)-392-325-966",
+  phone: "(plus eighty four)-392-325-9(sixty six)",
   email: "thanhnguyen2187@gmail.com",
   site: "nguyenhuythanh.com",
 )
 
 #resume_heading[Experience]
 #exp_item(
+  role: "Lead Software Engineer (Contractor)",
+  name: "TRS Project",
+  location: "Remote, Hanoi, Vietnam",
+  date: "01/2025 -- Present",
+  [*System Design & Architecture*: Designed a scalable web scraping system
+  supporting 20+ data sources with integrated local/remote LLM processing.
+  Achieved 99%+ success rate bypassing modern anti-bot protections (Cloudflare
+  Turnstile, Google reCAPTCHA) through advanced evasion techniques.],
+  [*Delivery*: Implemented and deployed the above system which increased human
+  data collection and processing efficiency by >100% (before: 8+ data records in
+  1 hour; after: 20+ data records in 1 hour).
+
+  Technologies used: TypeScript, Restate, PostgresQL, NixOS.]
+)
+#exp_item(
   role: "Fullstack Software Engineer",
   // role: "Software Engineer",
   name: "Wombat Exchange",
   location: "Remote, Hongkong SAR",
-  date: "7/2023 -- Present",
+  date: "7/2023 -- 12/2024",
   [*EVM Data Indexing*: Maintained and deployed subgraphs for 3+ EVM chains,
   which handled 600K+ events. The subgraphs served Wombat Analytics page, which
   made nearly 250K requests per month. Optimized Wombat Analytics page’s loading
   time from 10+ seconds to 1 second.
 
   Technologies used: TypeScript, AssemblyScript, NextJS, Subgraph.],
-  [*EVM Data Analytics*: Implemented 100+ Dune queries and graphs and dashboards,
-  which reduced Marketing Team's manual data calculation time by 90%.
+  // [*EVM Data Analytics*: Implemented 100+ Dune queries and graphs and dashboards,
+  // which reduced Marketing Team's manual data calculation time by 90%.
 
-  Technologies used: DuneSQL, Dune.],
+  // Technologies used: DuneSQL, Dune.],
 )
 #exp_item(
   role: "Software Engineer, Platform Engineer",
@@ -72,10 +87,10 @@
   for 50+ news sources.
 
   Technologies used: Python, Flask, SQLAlchemy, pika, RabbitMQ, APScheduler.],
-  [*Time Series Prediction*: Designed, implemented, and deployed configurable
-  Prediction Service that can leverage 20+ prediction models.
+  // [*Time Series Prediction*: Designed, implemented, and deployed configurable
+  // Prediction Service that can leverage 20+ prediction models.
 
-  Technologies used: Python, pandas, sklearn, statsmodels.],
+  // Technologies used: Python, pandas, sklearn, statsmodels.],
   // [*Sentiment Analysis*: Researched and implemented a custom rule-based
   // Sentiment Analysis Algorithm that utilizes 3K+ keywords to segment 5K+ text
   // documents.
@@ -129,15 +144,15 @@
     ).
   ],
 )
-#side_project_item(
-  name: "Phoenix",
-  content: [
-    Declarative machine configuration and dotfiles management with Nix, NixOS,
-    and Home Manager. Source at:
-    #link(
-      "https://github.com/thanhnguyen2187/.phoenix",
-      "github.com/thanhnguyen2187/.phoenix",
-    ).
-  ],
-)
+// #side_project_item(
+//   name: "Phoenix",
+//   content: [
+//     Declarative machine configuration and dotfiles management with Nix, NixOS,
+//     and Home Manager. Source at:
+//     #link(
+//       "https://github.com/thanhnguyen2187/.phoenix",
+//       "github.com/thanhnguyen2187/.phoenix",
+//     ).
+//   ],
+// )
 
