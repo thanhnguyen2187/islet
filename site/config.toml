@@ -1,6 +1,6 @@
 baseURL      = "https://nguyenhuythanh.com/"
 theme        = "hugo-bearblog"
-paginate     = 10
+# paginate     = 10
 rssLimit     = 10
 enableGitInfo = true
 
