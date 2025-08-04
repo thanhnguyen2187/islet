@@ -129,8 +129,8 @@
   content: [
     Offline-first code snippet manager powered by SvelteJS. Deployed at:
     #link(
-      "https://thanhnguyen2187.github.io/crypta",
-      "thanhnguyen2187.github.io/crypta",
+      "https://thanhnguyen2187.github.io/cryptaa",
+      "thanhnguyen2187.github.io/cryptaa",
     ).
   ],
 )
