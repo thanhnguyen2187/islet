@@ -50,6 +50,12 @@ tasks:
     cmds:
       - typst compile resume.typ
 
+  # resume-related commands
+  watch-resume:
+    dir: ./site/static
+    cmds:
+      - typst watch resume.typ
+
   open-resume: xdg-open ./site/static/resume.pdf
 
   # generic commands
