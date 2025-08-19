@@ -100,6 +100,12 @@
 
 #resume_heading[Education & Certification]
 #edu_item(
+  name: "WorldQuant University",
+  degree: "Master, Finance Engineering",
+  location: "Remote, USA",
+  date: "7/2024 -- Present",
+)
+#edu_item(
   name: "Le Quy Don Technical University",
   degree: "Engineer, Software Engineering",
   location: "Hanoi, Vietnam",
@@ -107,12 +113,6 @@
   [*GPA*: 3.13],
   [*Specialized Individuals Informatics Olympiad 2017*: Second Prize],
   [*Super Cup Informatics Olympiad 2018*: Third Prize],
-)
-#edu_item(
-  name: "WorldQuant University",
-  degree: "Master, Finance Engineering",
-  location: "Remote, USA",
-  date: "7/2024 -- Present",
 )
 // #edu_item(
 //   name: "IELTS Issued by British Council",
@@ -125,15 +125,35 @@
 
 #resume_heading("Side Projects")
 #side_project_item(
-  name: "Cryptaa",
+  name: "Sifintra",
   content: [
-    Offline-first code snippet manager powered by SvelteJS. Deployed at:
+    A simple finance tracker using Rust + SvelteKit
     #link(
-      "https://thanhnguyen2187.github.io/cryptaa",
-      "thanhnguyen2187.github.io/cryptaa",
+      "https://github.com/thanhnguyen2187/sifintra",
+      "github.com/thanhnguyen2187/sifintra",
     ).
   ],
 )
+#side_project_item(
+  name: "KVS",
+  content: [
+    A toy key-value database using Rust
+    #link(
+      "https://github.com/thanhnguyen2187/playground/tree/master/kvs",
+      "github.com/thanhnguyen2187/playground/tree/master/kvs",
+    ).
+  ],
+)
+// #side_project_item(
+//   name: "Cryptaa",
+//   content: [
+//     Offline-first code snippet manager powered by SvelteJS. Deployed at:
+//     #link(
+//       "https://thanhnguyen2187.github.io/cryptaa",
+//       "thanhnguyen2187.github.io/cryptaa",
+//     ).
+//   ],
+// )
 #side_project_item(
   name: "CamLisp",
   content: [
