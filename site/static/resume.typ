@@ -104,6 +104,8 @@
   degree: "Master, Finance Engineering",
   location: "Remote, USA",
   date: "7/2024 -- Present",
+  [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
+  Economics, Derivative Pricing]
 )
 #edu_item(
   name: "Le Quy Don Technical University",

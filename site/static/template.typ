@@ -72,7 +72,7 @@
         #date \
         _#location _
     ])
-    #list(..points)
+    // #list(..points)
   ])
 }
 
