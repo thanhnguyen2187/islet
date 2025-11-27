@@ -149,10 +149,10 @@
 #side_project_item(
   name: "Cryptaa",
   content: [
-    Offline-first code snippet manager powered by SvelteJS. Deployed at:
+    Offline-first note taker powered by SvelteJS. Source at:
     #link(
-      "https://thanhnguyen2187.github.io/cryptaa",
-      "thanhnguyen2187.github.io/cryptaa",
+      "https://github.com/thanhnguyen2187/cryptaa",
+      "github.com/thanhnguyen2187/cryptaa",
     ).
   ],
 )
