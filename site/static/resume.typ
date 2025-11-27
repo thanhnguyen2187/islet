@@ -14,7 +14,7 @@
   role: "Lead Software Engineer (Contractor)",
   name: "TRS Project",
   location: "Remote, Hanoi, Vietnam",
-  date: "01/2025 -- Present",
+  date: "3/2025 -- 10/2025",
   [*System Design & Architecture*: Designed a scalable web scraping system
   supporting 20+ data sources with integrated local/remote LLM processing.
   Achieved 99%+ success rate bypassing modern anti-bot protections (Cloudflare
@@ -23,14 +23,14 @@
   data collection and processing efficiency by >100% (before: 8+ data records in
   1 hour; after: 20+ data records in 1 hour).
 
-  Technologies used: TypeScript, Restate, PostgresQL, NixOS.]
+  Technologies used: SvelteJS, TypeScript, Restate, PostgresQL, NixOS.]
 )
 #exp_item(
   role: "Fullstack Software Engineer",
   // role: "Software Engineer",
   name: "Wombat Exchange",
   location: "Remote, Hongkong SAR",
-  date: "7/2023 -- 12/2024",
+  date: "7/2023 -- 2/2025",
   [*EVM Data Indexing*: Maintained and deployed subgraphs for 3+ EVM chains,
   which handled 600K+ events. The subgraphs served Wombat Analytics page, which
   made nearly 250K requests per month. Optimized Wombat Analytics page’s loading
@@ -126,36 +126,36 @@
 // )
 
 #resume_heading("Side Projects")
-#side_project_item(
-  name: "Sifintra",
-  content: [
-    A simple finance tracker using Rust + SvelteKit
-    #link(
-      "https://github.com/thanhnguyen2187/sifintra",
-      "github.com/thanhnguyen2187/sifintra",
-    ).
-  ],
-)
-#side_project_item(
-  name: "KVS",
-  content: [
-    A toy key-value database using Rust
-    #link(
-      "https://github.com/thanhnguyen2187/playground/tree/master/kvs",
-      "github.com/thanhnguyen2187/playground/tree/master/kvs",
-    ).
-  ],
-)
 // #side_project_item(
-//   name: "Cryptaa",
+//   name: "Sifintra",
 //   content: [
-//     Offline-first code snippet manager powered by SvelteJS. Deployed at:
+//     A simple finance tracker using Rust + SvelteKit
 //     #link(
-//       "https://thanhnguyen2187.github.io/cryptaa",
-//       "thanhnguyen2187.github.io/cryptaa",
+//       "https://github.com/thanhnguyen2187/sifintra",
+//       "github.com/thanhnguyen2187/sifintra",
 //     ).
 //   ],
 // )
+// #side_project_item(
+//   name: "KVS",
+//   content: [
+//     A toy key-value database using Rust
+//     #link(
+//       "https://github.com/thanhnguyen2187/playground/tree/master/kvs",
+//       "github.com/thanhnguyen2187/playground/tree/master/kvs",
+//     ).
+//   ],
+// )
+#side_project_item(
+  name: "Cryptaa",
+  content: [
+    Offline-first code snippet manager powered by SvelteJS. Deployed at:
+    #link(
+      "https://thanhnguyen2187.github.io/cryptaa",
+      "thanhnguyen2187.github.io/cryptaa",
+    ).
+  ],
+)
 #side_project_item(
   name: "CamLisp",
   content: [
@@ -163,6 +163,17 @@
     #link(
       "https://github.com/thanhnguyen2187/camlisp",
       "github.com/thanhnguyen2187/camlisp",
+    ).
+  ],
+)
+#side_project_item(
+  name: "Darkest Savior",
+  content: [
+    CLI written in Golang to parse DSON, a proprietary data format to JSON.
+    Source at: 
+    #link(
+      "https://github.com/thanhnguyen2187/darkest-savior",
+      "github.com/thanhnguyen2187/darkest-savior",
     ).
   ],
 )
