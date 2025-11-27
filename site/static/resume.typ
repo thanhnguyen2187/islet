@@ -15,13 +15,13 @@
   name: "TRS Project",
   location: "Remote, Hanoi, Vietnam",
   date: "3/2025 -- 10/2025",
-  [*System Design & Architecture*: Designed a scalable web scraping system
+  [*System Design & Architecture*: Architected a scalable web scraping system
   supporting 20+ data sources with integrated local/remote LLM processing.
   Achieved 99%+ success rate bypassing modern anti-bot protections (Cloudflare
   Turnstile, Google reCAPTCHA) through advanced evasion techniques.],
-  [*Delivery*: Implemented and deployed the above system which increased human
-  data collection and processing efficiency by >100% (before: 8+ data records in
-  1 hour; after: 20+ data records in 1 hour).
+  [*Delivery*: Implemented the project's MVP then evolved it to a fully
+  functioning system. Increased human data collection and processing efficiency
+  by >100% (before: 8+ data records per hour; after: 20+ data records per hour).
 
   Technologies used: SvelteJS, TypeScript, Restate, PostgresQL, NixOS.]
 )
@@ -104,8 +104,8 @@
   degree: "Master, Finance Engineering",
   location: "Remote, USA",
   date: "7/2024 -- Present",
-  [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
-  Economics, Derivative Pricing]
+  // [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
+  // Economics, Derivative Pricing]
 )
 #edu_item(
   name: "Le Quy Don Technical University",
@@ -169,7 +169,7 @@
 #side_project_item(
   name: "Darkest Savior",
   content: [
-    CLI written in Golang to parse DSON, a proprietary data format to JSON.
+    Golang CLI for parsing DSON (a proprietary data format) to JSON.
     Source at: 
     #link(
       "https://github.com/thanhnguyen2187/darkest-savior",
