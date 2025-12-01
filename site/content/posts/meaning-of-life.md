@@ -70,8 +70,10 @@ it's "apathetic agnosticism", or
 
 Relating to the society/others, I'm aware that I'm both significant to my
 friends and family, and insignificant to the society as a whole (without me the
-world still move on). Using the two beliefs, it naturally comes that "life has
-no meaning" nor serves any higher purpose. One may ask:
+world still move on). I can either choose my meaning to be around my friends and
+family, or decide that I'm not that important, and "life has no meaning" nor
+serves any higher purpose. For the first case, seems like we've solved
+something. However, for the second case, one may ask:
 
 - "If there's no meaning, why don't you just... die?"
 
@@ -86,12 +88,22 @@ we're in a living state that we can still think, and do the search. Getting to
 an other case, we still get stuck at deciding between living and dying, I'd
 assume that we need to live to get stuck.
 
-In either case, we need be alive, so the conclusion is that: we should live on
-to find out.
+In any case, we need be alive.
 
-Getting out of agnosticism and continue with atheism, it might be easier to
-understand: since we don't believe that there's a God, nor a higher deity, we
-instead put our belief into something else. The easiest
+Atheism might be easier to get through: since we don't believe that there's a
+God, nor a higher deity, we instead select another "object", such as science
+(For simplicity's sake, let's say we are understanding science as a huge set of
+different disciplines, and categorize them to 2 groups, social science which is
+human-related and natural science, which is not). I'm sure that people who are
+more well-versed than me in social science can have their own derivation, but
+I'd just use a simple finding from biology: the meaning of live is to survive,
+and reproduce. In society's point of view, it's good as well: a living
+individual that blends well enough to reproduce would help itself and bring
+values to the people around.
+
+In other words, we need to be alive, and have sex.
+
+Finally, getting to theism, again, my 
 
 [^wikipedia-agnosticism]: I know it's not good practice to quote Wikipedia, but
     I find it a good starting position and the quote is on point.
