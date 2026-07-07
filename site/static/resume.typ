@@ -11,6 +11,20 @@
 
 #resume_heading[Experience]
 #exp_item(
+  role: "Solution Engineer (Contractor)",
+  name: "SLW Technology",
+  location: "Remote, Hanoi, Vietnam",
+  date: "11/2025 -- 4/2026",
+  [*Data Infrastructure*: Explored and self-hosted Superset and PostgreSQL via
+  Docker to build a data warehousing MVP embedding Superset dashboards.
+  Demonstrated the MVP (a site that embed Superset dashboard) to a prospective
+  client, helping secure a new contract.
+
+  Technologies used: SvelteJS, Docker, Superset, PostgreSQL.],
+  [*Technical Feasibility*: Evaluated the technical feasibility of a crypto
+  wallet project for a prospective client, helping secure the contract.],
+)
+#exp_item(
   role: "Lead Software Engineer (Contractor)",
   name: "TRS Project",
   location: "Remote, Hanoi, Vietnam",
@@ -65,11 +79,11 @@
   name: "Teko Vietnam",
   location: "Hanoi, Vietnam",
   date: "4/2021 -- 12/2021",
-  [*Master Product Data*: Designed, implemented, and deployed data pipelines, data
-  models, and REST API of Product Matching Service which processed 10K+
-  products.
+  // [*Master Product Data*: Designed, implemented, and deployed data pipelines, data
+  // models, and REST API of Product Matching Service which processed 10K+
+  // products.
 
-  Technologies used: Python, Golang, FastAPI, SQLModel.],
+  // Technologies used: Python, Golang, FastAPI, SQLModel.],
   // [*Real-time Analytics Storage Layer*: Tested, deployed, and operated Apache
   // Druid as the real-time analytics storage layer for 80M+ events.
 
@@ -83,10 +97,10 @@
   name: "AI Academy Vietnam",
   location: "Hanoi, Vietnam",
   date: "6/2019 -- 8/2020",
-  [*Data Crawling*: Designed, implemented, and deployed Data Crawling Service
-  for 50+ news sources.
+  // [*Data Crawling*: Designed, implemented, and deployed Data Crawling Service
+  // for 50+ news sources.
 
-  Technologies used: Python, Flask, SQLAlchemy, pika, RabbitMQ, APScheduler.],
+  // Technologies used: Python, Flask, SQLAlchemy, pika, RabbitMQ, APScheduler.],
   // [*Time Series Prediction*: Designed, implemented, and deployed configurable
   // Prediction Service that can leverage 20+ prediction models.
 
@@ -99,14 +113,14 @@
 )
 
 #resume_heading[Education & Certification]
-#edu_item(
-  name: "WorldQuant University",
-  degree: "Master, Finance Engineering",
-  location: "Remote, USA",
-  date: "7/2024 -- Present",
-  // [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
-  // Economics, Derivative Pricing]
-)
+// #edu_item(
+//   name: "WorldQuant University",
+//   degree: "Master, Finance Engineering",
+//   location: "Remote, USA",
+//   date: "7/2024 -- Present",
+//   // [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
+//   // Economics, Derivative Pricing]
+// )
 #edu_item(
   name: "Le Quy Don Technical University",
   degree: "Engineer, Software Engineering",
