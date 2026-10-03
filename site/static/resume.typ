@@ -11,24 +11,35 @@
 
 #resume_heading[Experience]
 #exp_item(
-  role: "Solution Engineer (Contractor)",
-  name: "SLW Technology",
-  location: "Remote, Hanoi, Vietnam",
-  date: "11/2025 -- 4/2026",
-  [*Data Infrastructure*: Explored and self-hosted Superset and PostgreSQL via
-  Docker to build a data warehousing MVP embedding Superset dashboards.
-  Demonstrated the MVP (a site that embed Superset dashboard) to a prospective
-  client, helping secure a new contract.
+  role: "Quantitative Engineer",
+  name: "Voronoi Trading",
+  location: "Ho Chi Minh City, Vietnam",
+  date: "12/2025 -- 4/2026",
+  [*Trading Strategy*: Implemented a CEX/DEX arbitrage strategy across 10+
+  trading pairs, generating \~\$5K in daily trading volume. Built internal APIs
+  to record and report strategy execution and performance metrics.
 
-  Technologies used: SvelteJS, Docker, Superset, PostgreSQL.],
-  [*Technical Feasibility*: Evaluated the technical feasibility of a crypto
-  wallet project for a prospective client, helping secure the contract.],
+  Technologies used: Rust, TypeScript, PostgresQL.],
 )
+// #exp_item(
+//   role: "Solution Engineer (Contractor)",
+//   name: "SLW Technology",
+//   location: "Remote, Hanoi, Vietnam",
+//   date: "11/2025 -- 4/2026",
+//   [*Data Infrastructure*: Explored and self-hosted Superset and PostgreSQL via
+//   Docker to build a data warehousing MVP embedding Superset dashboards.
+//   Demonstrated the MVP (a site that embed Superset dashboard) to a prospective
+//   client, helping secure a new contract.
+
+//   Technologies used: SvelteJS, Docker, Superset, PostgreSQL.],
+//   [*Technical Feasibility*: Evaluated the technical feasibility of a crypto
+//   wallet project for a prospective client, helping secure the contract.],
+// )
 #exp_item(
   role: "Lead Software Engineer (Contractor)",
   name: "TRS Project",
   location: "Remote, Hanoi, Vietnam",
-  date: "3/2025 -- 10/2025",
+  date: "3/2025 -- 11/2025",
   [*System Design & Architecture*: Architected a scalable web scraping system
   supporting 20+ data sources with integrated local/remote LLM processing.
   Achieved 99%+ success rate bypassing modern anti-bot protections (Cloudflare
@@ -113,14 +124,14 @@
 )
 
 #resume_heading[Education & Certification]
-// #edu_item(
-//   name: "WorldQuant University",
-//   degree: "Master, Finance Engineering",
-//   location: "Remote, USA",
-//   date: "7/2024 -- Present",
-//   // [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
-//   // Economics, Derivative Pricing]
-// )
+#edu_item(
+  name: "WorldQuant University",
+  degree: "Master, Finance Engineering",
+  location: "Remote, USA",
+  date: "7/2024 -- Present",
+  // [*Relevant Courseworks*: Financial Markets, Financial Data, Financial
+  // Economics, Derivative Pricing]
+)
 #edu_item(
   name: "Le Quy Don Technical University",
   degree: "Engineer, Software Engineering",
